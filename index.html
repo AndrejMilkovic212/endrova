@@ -142,6 +142,14 @@
 
         section {
             padding: 100px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-title {
@@ -234,6 +242,13 @@
             backdrop-filter: blur(15px);
             transition: var(--transition);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        header.active {
+            transform: translateY(0);
+            opacity: 1;
         }
 
         header.scrolled {
@@ -1051,6 +1066,96 @@
             background-clip: text;
         }
 
+        /* Social Media Section */
+        .social-media {
+            text-align: center;
+            padding: 80px 0;
+            background: var(--primary-bg);
+            position: relative;
+        }
+
+        .social-media h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent) 0%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-bg);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent);
+        }
+
+        .social-icon.youtube:hover {
+            animation: youtubeVibrate 0.5s ease-in-out;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+        }
+
+        .social-icon.tiktok:hover {
+            animation: tiktokGlow 1.5s infinite;
+        }
+
+        .social-icon i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .social-icon.youtube i {
+            color: #FF0000;
+        }
+
+        .social-icon.tiktok i {
+            color: #000000;
+            text-shadow: 1px 0px 0px #00f2ea, -1px 0px 0px #ff0050;
+        }
+
+        .social-icon span {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @keyframes youtubeVibrate {
+            0%, 100% { transform: translateY(-10px) scale(1.05) rotate(0); }
+            25% { transform: translateY(-10px) scale(1.05) rotate(1deg); }
+            50% { transform: translateY(-10px) scale(1.05) rotate(-1deg); }
+            75% { transform: translateY(-10px) scale(1.05) rotate(1deg); }
+        }
+
+        @keyframes tiktokGlow {
+            0%, 100% { 
+                box-shadow: 0 0 10px rgba(0, 242, 234, 0.5), 0 0 20px rgba(255, 0, 80, 0.3);
+            }
+            50% { 
+                box-shadow: 0 0 20px rgba(0, 242, 234, 0.8), 0 0 30px rgba(255, 0, 80, 0.6);
+            }
+        }
+
         /* Footer */
         footer {
             background: var(--primary-bg);
@@ -1231,6 +1336,16 @@
             .platform-logos {
                 flex-direction: column;
                 gap: 30px;
+            }
+
+            .social-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-icon {
+                width: 100px;
+                height: 100px;
             }
         }
 
@@ -1601,6 +1716,31 @@
             </div>
         </section>
 
+        <!-- Social Media Section -->
+        <section class="social-media">
+            <div class="container">
+                <h2 data-aos="fade-up">Follow Us</h2>
+                <div class="social-icons">
+                    <a href="https://www.youtube.com/@androvatech" target="_blank" class="social-icon youtube" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fab fa-youtube"></i>
+                        <span>YouTube</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@androvatech" target="_blank" class="social-icon tiktok" data-aos="fade-up" data-aos-delay="200">
+                        <i class="fab fa-tiktok"></i>
+                        <span>TikTok</span>
+                    </a>
+                    <a href="https://x.com/androvatech" target="_blank" class="social-icon" data-aos="fade-up" data-aos-delay="300">
+                        <i class="fab fa-twitter"></i>
+                        <span>Twitter</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/androva-tech-767448375/" target="_blank" class="social-icon" data-aos="fade-up" data-aos-delay="400">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- CTA Section -->
         <section id="contact" class="cta">
             <div class="container">
@@ -1680,6 +1820,14 @@
                 setTimeout(() => {
                     splashScreen.style.display = 'none';
                     landingPage.style.display = 'block';
+                    
+                    // Show header with animation
+                    setTimeout(() => {
+                        document.getElementById('header').classList.add('active');
+                    }, 500);
+                    
+                    // Activate sections as they come into view
+                    activateSections();
                 }, 1000);
             }, 3000);
         });
@@ -1804,6 +1952,37 @@
         
         window.addEventListener('load', () => {
             setTimeout(animateCode, 1000);
+        });
+
+        // Section activation on scroll
+        function activateSections() {
+            const sections = document.querySelectorAll('section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        // Enhanced animations for social icons
+        document.querySelectorAll('.social-icon').forEach(icon => {
+            icon.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.05)';
+            });
+            
+            icon.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
         });
     </script>
 </body>
