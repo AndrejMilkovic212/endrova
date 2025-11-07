@@ -282,7 +282,7 @@
             position: relative;
             display: inline-block;
             white-space: nowrap;
-            margin-left: -35px; /* Pomaknuto još više u lijevo */
+            margin-left: -60px; /* Adjusted to move logo further left */
         }
 
         .logo-text {
@@ -330,7 +330,7 @@
 
         .nav-links {
             display: flex;
-            gap: 60px; /* Povećan razmak između linkova */
+            gap: 60px; /* Increased gap between links */
             align-items: center;
             margin: 0;
             padding: 0;
@@ -519,7 +519,7 @@
             }
         }
 
-        /* Code Animation */
+        /* Enhanced Code Animation */
         .code-animation {
             position: absolute;
             right: 5%;
@@ -527,22 +527,47 @@
             transform: translateY(-50%);
             width: 450px;
             height: 320px;
-            background: rgba(26, 34, 56, 0.7);
+            background: rgba(26, 34, 56, 0.9);
             border-radius: 15px;
             overflow: hidden;
             display: none;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(-50%) translateX(50px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .code-animation.visible {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
         }
 
         .code-header {
-            background: rgba(0, 245, 255, 0.1);
+            background: linear-gradient(90deg, rgba(0, 245, 255, 0.2), transparent);
             padding: 12px 15px;
             font-size: 0.9rem;
             display: flex;
             align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .code-animation.visible .code-header:before {
+            left: 100%;
         }
 
         .code-dots {
@@ -555,6 +580,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
+            transition: transform 0.3s ease;
         }
 
         .code-dot:nth-child(1) {
@@ -569,11 +595,29 @@
             background: #27ca3f;
         }
 
+        .code-animation:hover .code-dot {
+            transform: scale(1.2);
+        }
+
         .code-content {
             padding: 25px;
-            font-family: 'Courier New', monospace;
+            font-family: 'Fira Code', 'Courier New', monospace;
             font-size: 0.95rem;
             line-height: 1.5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-content:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent 95%, rgba(0, 245, 255, 0.1) 100%);
+            background-size: 100% 30px;
+            pointer-events: none;
         }
 
         .code-line {
@@ -581,10 +625,21 @@
             opacity: 0;
             transform: translateX(-20px);
             transition: opacity 0.5s ease, transform 0.5s ease;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .line-number {
+            color: rgba(255, 255, 255, 0.3);
+            margin-right: 15px;
+            font-size: 0.8rem;
+            min-width: 20px;
+            text-align: right;
         }
 
         .code-comment {
             color: #6a9955;
+            font-style: italic;
         }
 
         .code-tag {
@@ -597,6 +652,66 @@
 
         .code-value {
             color: #ce9178;
+        }
+
+        .code-text {
+            color: #d4d4d4;
+        }
+
+        .code-indent {
+            margin-left: 20px;
+        }
+
+        .code-indent-2 {
+            margin-left: 40px;
+        }
+
+        .code-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 18px;
+            background: var(--accent);
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .code-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 245, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .code-animation:hover .code-glow {
+            opacity: 1;
+        }
+
+        /* Typing animation for code */
+        @keyframes typeIn {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        .typing-line {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid var(--accent);
+            animation: typeIn 2s steps(40, end);
         }
 
         /* Video Section */
@@ -1048,71 +1163,361 @@
             box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
         }
 
-        /* Templates Section */
-        .templates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .template-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .template-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            border-color: rgba(0, 245, 255, 0.2);
-        }
-
-        .template-img {
-            height: 220px;
-            background-size: cover;
-            background-position: center;
+        /* How We Work Section */
+        .how-we-work {
+            padding: 120px 0;
+            background: var(--secondary-bg);
             position: relative;
             overflow: hidden;
         }
 
-        .template-img:after {
+        .how-we-work:before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, rgba(0, 245, 255, 0.2), transparent);
-            opacity: 0;
-            transition: var(--transition);
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(0, 245, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(0, 245, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
         }
 
-        .template-card:hover .template-img:after {
+        /* Computer Animation */
+        .computer-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .computer-setup {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            transform-style: preserve-3d;
+            animation: computerFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes computerFloat {
+            0%, 100% { transform: translateY(0) rotateX(5deg); }
+            50% { transform: translateY(-20px) rotateX(5deg); }
+        }
+
+        .monitor {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 400px;
+            background: #1a1a1a;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 15px solid #2a2a2a;
+            z-index: 2;
+        }
+
+        .monitor:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .monitor-screen {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            background: #0a0e17;
+            border-radius: 10px;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .screen-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .screen-content.active {
             opacity: 1;
         }
 
-        .template-content {
-            padding: 25px;
+        .screen-header {
+            background: rgba(26, 34, 56, 0.9);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .template-content h3 {
-            margin-bottom: 15px;
+        .screen-dots {
+            display: flex;
+            gap: 8px;
+            margin-right: 15px;
+        }
+
+        .screen-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .screen-dot:nth-child(1) { background: #ff5f56; }
+        .screen-dot:nth-child(2) { background: #ffbd2e; }
+        .screen-dot:nth-child(3) { background: #27ca3f; }
+
+        .screen-title {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .screen-body {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .code-preview {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .code-line {
+            margin-bottom: 5px;
+            display: flex;
+        }
+
+        .line-number {
+            color: rgba(255, 255, 255, 0.3);
+            margin-right: 15px;
+            min-width: 20px;
+            text-align: right;
+        }
+
+        .code-tag {
+            color: #569cd6;
+        }
+
+        .code-attr {
+            color: #9cdcfe;
+        }
+
+        .code-value {
+            color: #ce9178;
+        }
+
+        .code-text {
+            color: #d4d4d4;
+        }
+
+        .code-comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+
+        .website-preview {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .website-header {
+            width: 90%;
+            height: 60px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .website-hero {
+            width: 90%;
+            height: 200px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 30px;
+            animation: pulse 2s infinite;
+            animation-delay: 0.5s;
+        }
+
+        .website-features {
+            width: 90%;
+            display: flex;
+            gap: 15px;
+            justify-content: space-between;
+        }
+
+        .website-feature {
+            height: 80px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            flex: 1;
+            animation: pulse 2s infinite;
+            animation-delay: 1s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .monitor-stand {
+            position: absolute;
+            top: 400px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 150px;
+            background: #2a2a2a;
+            clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+            z-index: 1;
+        }
+
+        .keyboard {
+            position: absolute;
+            top: 530px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 30px;
+            background: #2a2a2a;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            animation: keyboardGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes keyboardGlow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+            50% { box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3); }
+        }
+
+        .mouse {
+            position: absolute;
+            top: 530px;
+            left: calc(50% + 280px);
+            width: 60px;
+            height: 100px;
+            background: #2a2a2a;
+            border-radius: 30px 30px 10px 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            animation: mouseMove 5s ease-in-out infinite;
+        }
+
+        @keyframes mouseMove {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(-5px) rotate(-5deg); }
+        }
+
+        .work-process {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 80px;
+        }
+
+        .process-step {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(0, 245, 255, 0.2);
+        }
+
+        .process-step:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .process-step:hover:before {
+            transform: scaleX(1);
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: var(--primary-bg);
+            box-shadow: 0 10px 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .process-step h3 {
             font-size: 1.5rem;
+            margin-bottom: 15px;
             font-weight: 700;
         }
 
-        .template-content p {
+        .process-step p {
             color: var(--text-secondary);
-            margin-bottom: 25px;
-            font-size: 1.1rem;
+            line-height: 1.6;
         }
 
-        /* Testimonials Section */
+        /* Testimonials Section - IMPROVED */
         .testimonials {
             background: var(--secondary-bg);
             position: relative;
+            overflow: hidden;
         }
 
         .testimonials:before {
@@ -1140,6 +1545,8 @@
             scroll-behavior: smooth;
             scrollbar-width: none;
             border-radius: var(--border-radius);
+            position: relative;
+            height: 450px;
         }
 
         .testimonial-slider::-webkit-scrollbar {
@@ -1153,6 +1560,35 @@
             border-radius: var(--border-radius);
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .testimonial.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            z-index: 2;
+        }
+
+        .testimonial.next {
+            opacity: 0.7;
+            transform: translateX(100%) scale(0.9);
+            z-index: 1;
+        }
+
+        .testimonial.prev {
+            opacity: 0.7;
+            transform: translateX(-100%) scale(0.9);
+            z-index: 1;
         }
 
         .testimonial-content {
@@ -1161,6 +1597,7 @@
             margin-bottom: 30px;
             position: relative;
             line-height: 1.7;
+            max-width: 700px;
         }
 
         .testimonial-content:before, .testimonial-content:after {
@@ -1187,24 +1624,48 @@
             align-items: center;
             justify-content: center;
             gap: 20px;
+            margin-top: 20px;
         }
 
         .client-avatar {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent) 0%, #00c4cc 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
             color: var(--primary-bg);
             box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .client-avatar:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: var(--transition);
+        }
+
+        .client-avatar:hover:before {
+            transform: rotate(225deg);
         }
 
         .client-details h4 {
             font-size: 1.3rem;
             font-weight: 700;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, var(--accent) 0%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .client-details p {
@@ -1226,12 +1687,110 @@
             background: var(--text-secondary);
             cursor: pointer;
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider-dot:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: var(--transition);
+        }
+
+        .slider-dot.active:before {
+            transform: scale(1);
         }
 
         .slider-dot.active {
-            background: var(--accent);
             transform: scale(1.2);
             box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .slider-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .slider-btn:hover {
+            background: var(--accent);
+            color: var(--primary-bg);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px var(--accent-glow);
+        }
+
+        /* Floating elements for testimonials */
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 245, 255, 0.1);
+            animation: float 8s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+        }
+
+        .floating-shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            top: 70%;
+            left: 85%;
+            width: 30px;
+            height: 30px;
+            animation-delay: 2s;
+        }
+
+        .floating-shape:nth-child(3) {
+            top: 40%;
+            left: 5%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 4s;
+        }
+
+        .floating-shape:nth-child(4) {
+            top: 80%;
+            left: 20%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 6s;
         }
 
         /* Partners Section */
@@ -2051,127 +2610,17 @@
             border-color: var(--text-secondary);
         }
 
-        /* Laptop SVG Styles */
-        .laptop-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .laptop-svg {
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-        }
-
-        .laptop-screen {
-            position: absolute;
-            top: 7.5%;
-            left: 12.5%;
-            width: 75%;
-            height: 75%;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: screenGlow 4s ease-in-out infinite;
-        }
-
-        .laptop-screen img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        @keyframes screenGlow {
-            0%, 100% {
-                box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
-            }
-            50% {
-                box-shadow: 0 0 20px rgba(0, 245, 255, 0.7);
-            }
-        }
-
-        /* Updated Templates Section */
-        .templates-intro {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 60px;
-        }
-
-        .templates-intro h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent) 0%, #ffffff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .templates-intro p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        /* Enhanced Animations for Template Cards */
-        .template-card {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .template-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(0, 245, 255, 0.1), transparent);
-            opacity: 0;
-            transition: var(--transition);
-            z-index: 1;
-        }
-
-        .template-card:hover:before {
-            opacity: 1;
-        }
-
-        .template-card .template-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .template-card .template-img {
-            transition: transform 0.8s ease;
-        }
-
-        .template-card:hover .template-img {
-            transform: scale(1.1);
-        }
-
-        /* Floating Animation for Template Cards */
-        .template-card {
-            animation: templateFloat 8s ease-in-out infinite;
-        }
-
-        @keyframes templateFloat {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
         /* Responsive Design */
         @media (min-width: 1200px) {
             .code-animation {
                 display: block;
+            }
+        }
+
+        @media (max-width: 1300px) {
+            .code-animation {
+                width: 400px;
+                height: 300px;
             }
         }
 
@@ -2194,6 +2643,42 @@
             
             .nav-links {
                 gap: 30px;
+            }
+            
+            .code-animation {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                margin: 40px auto;
+                width: 100%;
+                max-width: 500px;
+                opacity: 1;
+            }
+            
+            .code-animation.visible {
+                transform: none;
+            }
+            
+            .computer-setup {
+                transform: scale(0.8);
+            }
+            
+            .monitor {
+                width: 600px;
+                height: 350px;
+            }
+            
+            .monitor-stand {
+                top: 350px;
+            }
+            
+            .keyboard {
+                top: 480px;
+            }
+            
+            .mouse {
+                top: 480px;
             }
         }
 
@@ -2285,6 +2770,47 @@
             .partners-grid {
                 grid-template-columns: 1fr;
             }
+            
+            /* Testimonials Mobile */
+            .testimonial {
+                padding: 40px 25px;
+            }
+
+            .testimonial-content {
+                font-size: 1.1rem;
+            }
+
+            .client-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .computer-setup {
+                transform: scale(0.6);
+            }
+            
+            .monitor {
+                width: 500px;
+                height: 300px;
+            }
+            
+            .monitor-stand {
+                top: 300px;
+            }
+            
+            .keyboard {
+                top: 420px;
+                width: 400px;
+            }
+            
+            .mouse {
+                top: 420px;
+                left: calc(50% + 230px);
+            }
+            
+            .work-process {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 576px) {
@@ -2309,7 +2835,11 @@
             }
 
             .testimonial {
-                padding: 40px 25px;
+                padding: 30px 20px;
+            }
+
+            .testimonial-content {
+                font-size: 1rem;
             }
 
             .splash-logo {
@@ -2323,6 +2853,29 @@
             .messenger-app-logo {
                 width: 30px;
                 height: 30px;
+            }
+            
+            .computer-setup {
+                transform: scale(0.5);
+            }
+            
+            .monitor {
+                width: 400px;
+                height: 250px;
+            }
+            
+            .monitor-stand {
+                top: 250px;
+            }
+            
+            .keyboard {
+                top: 350px;
+                width: 300px;
+            }
+            
+            .mouse {
+                top: 350px;
+                left: calc(50% + 180px);
             }
         }
     </style>
@@ -2348,11 +2901,11 @@
                     </a>
                     
                     <ul class="nav-links">
+                        <li><a href="#how-we-work">How We Work</a></li>
                         <li><a href="#video">Our Work</a></li>
                         <li><a href="#ecommerce-solutions">E-commerce Solutions</a></li>
                         <li><a href="#youtube-support">YouTube Support</a></li>
                         <li><a href="#pricing">Pricing</a></li>
-                        <li><a href="#templates">Templates</a></li>
                         <li><a href="#testimonials">Testimonials</a></li>
                         <li><a href="#partners">Partners</a></li>
                         <li><a href="#contact">Contact Us</a></li>
@@ -2376,8 +2929,9 @@
                     <div class="floating-element"></div>
                 </div>
                 
-                <!-- Code Animation -->
-                <div class="code-animation">
+                <!-- Enhanced Code Animation -->
+                <div class="code-animation" id="codeAnimation">
+                    <div class="code-glow"></div>
                     <div class="code-header">
                         <div class="code-dots">
                             <div class="code-dot"></div>
@@ -2387,20 +2941,80 @@
                         <span>website.html</span>
                     </div>
                     <div class="code-content">
-                        <div class="code-line"><span class="code-tag">&lt;!DOCTYPE html&gt;</span></div>
-                        <div class="code-line"><span class="code-tag">&lt;html</span> <span class="code-attr">lang</span>=<span class="code-value">"en"</span><span class="code-tag">&gt;</span></div>
-                        <div class="code-line"><span class="code-tag">&lt;head&gt;</span></div>
-                        <div class="code-line">&nbsp;&nbsp;<span class="code-tag">&lt;title&gt;</span>Your Business<span class="code-tag">&lt;/title&gt;</span></div>
-                        <div class="code-line"><span class="code-tag">&lt;/head&gt;</span></div>
-                        <div class="code-line"><span class="code-tag">&lt;body&gt;</span></div>
-                        <div class="code-line">&nbsp;&nbsp;<span class="code-tag">&lt;header&gt;</span></div>
-                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">&lt;!-- Navigation --&gt;</span></div>
-                        <div class="code-line">&nbsp;&nbsp;<span class="code-tag">&lt;/header&gt;</span></div>
-                        <div class="code-line">&nbsp;&nbsp;<span class="code-tag">&lt;main&gt;</span></div>
-                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">&lt;!-- Hero Section --&gt;</span></div>
-                        <div class="code-line">&nbsp;&nbsp;<span class="code-tag">&lt;/main&gt;</span></div>
-                        <div class="code-line"><span class="code-tag">&lt;/body&gt;</span></div>
-                        <div class="code-line"><span class="code-tag">&lt;/html&gt;</span></div>
+                        <div class="code-line" data-delay="0">
+                            <span class="line-number">1</span>
+                            <span class="code-tag">&lt;!DOCTYPE html&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="200">
+                            <span class="line-number">2</span>
+                            <span class="code-tag">&lt;html</span> <span class="code-attr">lang</span>=<span class="code-value">"en"</span><span class="code-tag">&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="400">
+                            <span class="line-number">3</span>
+                            <span class="code-tag">&lt;head&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="600">
+                            <span class="line-number">4</span>
+                            <span class="code-indent"></span>
+                            <span class="code-tag">&lt;meta</span> <span class="code-attr">charset</span>=<span class="code-value">"UTF-8"</span><span class="code-tag">&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="800">
+                            <span class="line-number">5</span>
+                            <span class="code-indent"></span>
+                            <span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-value">"viewport"</span> <span class="code-attr">content</span>=<span class="code-value">"width=device-width, initial-scale=1.0"</span><span class="code-tag">&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="1000">
+                            <span class="line-number">6</span>
+                            <span class="code-indent"></span>
+                            <span class="code-tag">&lt;title&gt;</span><span class="code-text">Your Business</span><span class="code-tag">&lt;/title&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="1200">
+                            <span class="line-number">7</span>
+                            <span class="code-tag">&lt;/head&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="1400">
+                            <span class="line-number">8</span>
+                            <span class="code-tag">&lt;body&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="1600">
+                            <span class="line-number">9</span>
+                            <span class="code-indent"></span>
+                            <span class="code-tag">&lt;header&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="1800">
+                            <span class="line-number">10</span>
+                            <span class="code-indent-2"></span>
+                            <span class="code-comment">&lt;!-- Navigation --&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="2000">
+                            <span class="line-number">11</span>
+                            <span class="code-indent"></span>
+                            <span class="code-tag">&lt;/header&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="2200">
+                            <span class="line-number">12</span>
+                            <span class="code-indent"></span>
+                            <span class="code-tag">&lt;main&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="2400">
+                            <span class="line-number">13</span>
+                            <span class="code-indent-2"></span>
+                            <span class="code-comment">&lt;!-- Hero Section --&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="2600">
+                            <span class="line-number">14</span>
+                            <span class="code-indent"></span>
+                            <span class="code-tag">&lt;/main&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="2800">
+                            <span class="line-number">15</span>
+                            <span class="code-tag">&lt;/body&gt;</span>
+                        </div>
+                        <div class="code-line" data-delay="3000">
+                            <span class="line-number">16</span>
+                            <span class="code-tag">&lt;/html&gt;</span>
+                            <span class="code-cursor"></span>
+                        </div>
                     </div>
                 </div>
                 
@@ -2408,7 +3022,7 @@
                     <div class="hero-content">
                         <h1 class="animate-text">Websites. Smarter. Faster.</h1>
                         <p class="animate-text" style="transition-delay: 0.2s">High-performance, beautifully crafted websites built to help your business stand out. Androva combines design excellence with seamless functionality.</p>
-                        <a href="#pricing" class="btn btn-glow animate-text" style="transition-delay: 0.4s">Unlock Full Access</a>
+                        <a href="#how-we-work" class="btn btn-glow animate-text" style="transition-delay: 0.4s">See How We Work</a>
                         
                         <div class="hero-stats animate-stagger">
                             <div class="stat">
@@ -2428,6 +3042,169 @@
                 </div>
             </section>
 
+            <!-- How We Work Section -->
+            <section id="how-we-work" class="how-we-work">
+                <div class="container">
+                    <h2 class="section-title animate-text">How We Work</h2>
+                    
+                    <div class="computer-container">
+                        <div class="computer-setup">
+                            <!-- Monitor -->
+                            <div class="monitor">
+                                <div class="monitor-screen">
+                                    <!-- Code Screen -->
+                                    <div class="screen-content active" id="codeScreen">
+                                        <div class="screen-header">
+                                            <div class="screen-dots">
+                                                <div class="screen-dot"></div>
+                                                <div class="screen-dot"></div>
+                                                <div class="screen-dot"></div>
+                                            </div>
+                                            <div class="screen-title">website.html</div>
+                                        </div>
+                                        <div class="screen-body">
+                                            <div class="code-preview">
+                                                <div class="code-line">
+                                                    <span class="line-number">1</span>
+                                                    <span class="code-tag">&lt;!DOCTYPE html&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">2</span>
+                                                    <span class="code-tag">&lt;html</span> <span class="code-attr">lang</span>=<span class="code-value">"en"</span><span class="code-tag">&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">3</span>
+                                                    <span class="code-tag">&lt;head&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">4</span>
+                                                    <span class="code-tag">&lt;meta</span> <span class="code-attr">charset</span>=<span class="code-value">"UTF-8"</span><span class="code-tag">&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">5</span>
+                                                    <span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-value">"viewport"</span> <span class="code-attr">content</span>=<span class="code-value">"width=device-width, initial-scale=1.0"</span><span class="code-tag">&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">6</span>
+                                                    <span class="code-tag">&lt;title&gt;</span><span class="code-text">Your Business</span><span class="code-tag">&lt;/title&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">7</span>
+                                                    <span class="code-comment">&lt;!-- Androva crafted this website --&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">8</span>
+                                                    <span class="code-tag">&lt;/head&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">9</span>
+                                                    <span class="code-tag">&lt;body&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">10</span>
+                                                    <span class="code-tag">&lt;header&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">11</span>
+                                                    <span class="code-comment">&lt;!-- Navigation --&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">12</span>
+                                                    <span class="code-tag">&lt;/header&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">13</span>
+                                                    <span class="code-tag">&lt;main&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">14</span>
+                                                    <span class="code-comment">&lt;!-- Hero Section --&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">15</span>
+                                                    <span class="code-tag">&lt;/main&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">16</span>
+                                                    <span class="code-tag">&lt;/body&gt;</span>
+                                                </div>
+                                                <div class="code-line">
+                                                    <span class="line-number">17</span>
+                                                    <span class="code-tag">&lt;/html&gt;</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Website Preview Screen -->
+                                    <div class="screen-content" id="previewScreen">
+                                        <div class="screen-header">
+                                            <div class="screen-dots">
+                                                <div class="screen-dot"></div>
+                                                <div class="screen-dot"></div>
+                                                <div class="screen-dot"></div>
+                                            </div>
+                                            <div class="screen-title">yourwebsite.com</div>
+                                        </div>
+                                        <div class="screen-body">
+                                            <div class="website-preview">
+                                                <div class="website-header"></div>
+                                                <div class="website-hero"></div>
+                                                <div class="website-features">
+                                                    <div class="website-feature"></div>
+                                                    <div class="website-feature"></div>
+                                                    <div class="website-feature"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Monitor Stand -->
+                            <div class="monitor-stand"></div>
+                            
+                            <!-- Keyboard -->
+                            <div class="keyboard"></div>
+                            
+                            <!-- Mouse -->
+                            <div class="mouse"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="work-process animate-stagger">
+                        <div class="process-step animate-on-scroll">
+                            <div class="step-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>Concept & Strategy</h3>
+                            <p>We start by understanding your business goals and creating a strategic plan for your digital presence.</p>
+                        </div>
+                        <div class="process-step animate-on-scroll">
+                            <div class="step-icon">
+                                <i class="fas fa-pencil-alt"></i>
+                            </div>
+                            <h3>Design & Prototyping</h3>
+                            <p>Our designers create stunning visuals and interactive prototypes that bring your vision to life.</p>
+                        </div>
+                        <div class="process-step animate-on-scroll">
+                            <div class="step-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3>Development & Coding</h3>
+                            <p>Our developers build high-performance, responsive websites using the latest technologies.</p>
+                        </div>
+                        <div class="process-step animate-on-scroll">
+                            <div class="step-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3>Launch & Optimization</h3>
+                            <p>We deploy your website and continuously optimize it for maximum performance and results.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Video Section -->
             <section id="video" class="video-section">
                 <div class="container">
@@ -2437,7 +3214,7 @@
                     </div>
                     <div class="video-container animate-scale" style="transition-delay: 0.4s">
                         <div class="video-wrapper">
-                            <iframe src="https://www.youtube.com/embed/PDCSRDTlhKU?si=Addb-a84eNV1n97V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/PDCSRDTlhKU?si=Addb-a84eNV1n97V" title="YouTube video player" frameborder="0" allow="accelerometer; autplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -2615,32 +3392,20 @@
                 </div>
             </section>
 
-            <!-- Templates Section -->
-            <section id="templates">
-                <div class="container">
-                    <h2 class="section-title animate-text">Our Work</h2>
-                    
-                    <div class="laptop-container animate-scale">
-                        <svg class="laptop-svg" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M50 100 L750 100 L750 400 L50 400 Z" fill="#333" stroke="#555" stroke-width="2"/>
-                            <path d="M100 120 L700 120 L700 380 L100 380 Z" fill="#222" stroke="#444" stroke-width="1"/>
-                            <path d="M150 400 L650 400 L650 450 L150 450 Z" fill="#444" stroke="#666" stroke-width="1"/>
-                            <path d="M350 450 L450 450 L450 480 L350 480 Z" fill="#555" stroke="#777" stroke-width="1"/>
-                        </svg>
-                        <div class="laptop-screen">
-                            <img src="https://i.postimg.cc/tJZfPyn3/za-potrebe.png" alt="Androva Website Example">
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Testimonials Section -->
+            <!-- Testimonials Section - IMPROVED -->
             <section id="testimonials" class="testimonials">
                 <div class="container">
                     <h2 class="section-title animate-text">Client Testimonials</h2>
                     <div class="testimonials-container">
-                        <div class="testimonial-slider animate-scale">
-                            <div class="testimonial">
+                        <div class="floating-shapes">
+                            <div class="floating-shape"></div>
+                            <div class="floating-shape"></div>
+                            <div class="floating-shape"></div>
+                            <div class="floating-shape"></div>
+                        </div>
+                        
+                        <div class="testimonial-slider">
+                            <div class="testimonial active">
                                 <div class="testimonial-content">
                                     <p>Androva transformed our small bakery's online presence. We had a beautiful, functional website in just 24 hours. The pricing model is perfect for our budget.</p>
                                 </div>
@@ -2683,10 +3448,20 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="slider-controls animate-stagger">
                             <div class="slider-dot active" data-slide="0"></div>
                             <div class="slider-dot" data-slide="1"></div>
                             <div class="slider-dot" data-slide="2"></div>
+                        </div>
+                        
+                        <div class="slider-nav animate-stagger">
+                            <button class="slider-btn prev-btn">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="slider-btn next-btn">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -2906,11 +3681,11 @@
                     </div>
                     <div class="footer-column animate-on-scroll">
                         <h3>Quick Links</h3>
+                        <a href="#how-we-work">How We Work</a>
                         <a href="#video">Our Work</a>
                         <a href="#ecommerce-solutions">E-commerce Solutions</a>
                         <a href="#youtube-support">YouTube Support</a>
                         <a href="#pricing">Pricing</a>
-                        <a href="#templates">Templates</a>
                         <a href="#testimonials">Testimonials</a>
                         <a href="#partners">Partners</a>
                         <a href="#contact">Contact Us</a>
@@ -2952,7 +3727,57 @@
             offset: 100
         });
 
-        // Splash Screen Animation
+        // Enhanced Code Animation
+        function initializeCodeAnimation() {
+            const codeAnimation = document.getElementById('codeAnimation');
+            const codeLines = document.querySelectorAll('.code-line');
+            
+            // Make code animation visible with delay
+            setTimeout(() => {
+                codeAnimation.classList.add('visible');
+                
+                // Animate code lines with staggered delay
+                codeLines.forEach(line => {
+                    const delay = parseInt(line.getAttribute('data-delay')) || 0;
+                    setTimeout(() => {
+                        line.style.opacity = '1';
+                        line.style.transform = 'translateX(0)';
+                    }, delay);
+                });
+                
+                // Add continuous animation loop
+                setTimeout(() => {
+                    startCodeAnimationLoop();
+                }, 4000);
+            }, 1500);
+        }
+
+        function startCodeAnimationLoop() {
+            const codeLines = document.querySelectorAll('.code-line');
+            const cursor = document.querySelector('.code-cursor');
+            
+            // Reset animation
+            codeLines.forEach(line => {
+                line.style.opacity = '0';
+                line.style.transform = 'translateX(-20px)';
+            });
+            
+            // Restart animation with delay
+            setTimeout(() => {
+                codeLines.forEach(line => {
+                    const delay = parseInt(line.getAttribute('data-delay')) || 0;
+                    setTimeout(() => {
+                        line.style.opacity = '1';
+                        line.style.transform = 'translateX(0)';
+                    }, delay);
+                });
+            }, 1000);
+            
+            // Loop every 8 seconds
+            setTimeout(startCodeAnimationLoop, 8000);
+        }
+
+        // Update the existing DOMContentLoaded event listener
         document.addEventListener('DOMContentLoaded', function() {
             const splashScreen = document.getElementById('splashScreen');
             const landingPage = document.getElementById('landingPage');
@@ -2977,8 +3802,9 @@
                         document.getElementById('header').classList.add('active');
                     }, 500);
                     
-                    // Initialize scroll animations
+                    // Initialize all animations
                     initializeScrollAnimations();
+                    initializeCodeAnimation();
                 }, 1000);
             }, 3000);
         });
@@ -3046,80 +3872,79 @@
             });
         });
 
-        // Testimonial Slider
-        const slider = document.querySelector('.testimonial-slider');
+        // Testimonial Slider - IMPROVED
+        const testimonials = document.querySelectorAll('.testimonial');
         const dots = document.querySelectorAll('.slider-dot');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
         let currentSlide = 0;
 
         function showSlide(index) {
-            if (index < 0) index = dots.length - 1;
-            if (index >= dots.length) index = 0;
+            if (index < 0) index = testimonials.length - 1;
+            if (index >= testimonials.length) index = 0;
             
-            slider.scrollLeft = index * slider.offsetWidth;
+            // Hide all testimonials
+            testimonials.forEach(testimonial => {
+                testimonial.classList.remove('active', 'prev', 'next');
+            });
             
+            // Show current testimonial
+            testimonials[index].classList.add('active');
+            
+            // Set previous and next for animation purposes
+            const prevIndex = index === 0 ? testimonials.length - 1 : index - 1;
+            const nextIndex = index === testimonials.length - 1 ? 0 : index + 1;
+            
+            testimonials[prevIndex].classList.add('prev');
+            testimonials[nextIndex].classList.add('next');
+            
+            // Update dots
             dots.forEach(dot => dot.classList.remove('active'));
             dots[index].classList.add('active');
             
             currentSlide = index;
         }
 
+        // Dot navigation
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
                 showSlide(index);
             });
         });
 
+        // Button navigation
+        prevBtn.addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+        });
+
         // Auto-advance slides
         setInterval(() => {
             showSlide(currentSlide + 1);
-        }, 5000);
+        }, 6000);
 
-        // FAQ Accordion
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const item = question.parentElement;
-                item.classList.toggle('active');
-                
-                // Close other items
-                document.querySelectorAll('.faq-item').forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
-                });
-            });
-        });
+        // Screen switching animation
+        const codeScreen = document.getElementById('codeScreen');
+        const previewScreen = document.getElementById('previewScreen');
+        let currentScreen = 'code';
 
-        // Code animation effect
-        const codeLines = document.querySelectorAll('.code-line');
-        let currentLine = 0;
-        
-        function animateCode() {
-            if (currentLine < codeLines.length) {
-                codeLines[currentLine].style.opacity = 1;
-                codeLines[currentLine].style.transform = 'translateX(0)';
-                currentLine++;
-                setTimeout(animateCode, 200);
+        function switchScreen() {
+            if (currentScreen === 'code') {
+                codeScreen.classList.remove('active');
+                previewScreen.classList.add('active');
+                currentScreen = 'preview';
             } else {
-                setTimeout(() => {
-                    codeLines.forEach(line => {
-                        line.style.opacity = 0;
-                        line.style.transform = 'translateX(-20px)';
-                    });
-                    currentLine = 0;
-                    setTimeout(animateCode, 500);
-                }, 3000);
+                previewScreen.classList.remove('active');
+                codeScreen.classList.add('active');
+                currentScreen = 'code';
             }
         }
-        
-        codeLines.forEach(line => {
-            line.style.opacity = 0;
-            line.style.transform = 'translateX(-20px)';
-            line.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        });
-        
-        window.addEventListener('load', () => {
-            setTimeout(animateCode, 1000);
-        });
+
+        // Switch screens every 5 seconds
+        setInterval(switchScreen, 5000);
 
         // Advanced scroll animations
         function initializeScrollAnimations() {
@@ -3195,7 +4020,7 @@
             });
         });
         
-        // Form submission
+        // Contact form submission
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -3238,6 +4063,25 @@
                     }, 5000);
                 }, 1500);
             }
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
         });
     </script>
 </body>
