@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+:<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -240,7 +240,7 @@
             box-shadow: 0 10px 25px var(--youtube-glow);
         }
 
-        /* Header & Navigation - FIXED */
+        /* Header & Navigation - IMPROVED SPACING */
         header {
             position: fixed;
             top: 0;
@@ -282,7 +282,8 @@
             position: relative;
             display: inline-block;
             white-space: nowrap;
-            margin-left: -60px; /* Adjusted to move logo further left */
+            padding-left: 28px; /* Added left padding for better spacing */
+            margin-right: 80px; /* POVEĆANO SA 28px NA 80px za veći razmak */
         }
 
         .logo-text {
@@ -330,10 +331,11 @@
 
         .nav-links {
             display: flex;
-            gap: 60px; /* Increased gap between links */
+            gap: 54px; /* Increased from 40px to 54px for better spacing */
             align-items: center;
             margin: 0;
             padding: 0;
+            margin-left: 0; /* Promijenjeno iz auto u 0 */
         }
 
         .nav-links a {
@@ -374,6 +376,7 @@
             transition: var(--transition);
             padding: 5px;
             border-radius: 5px;
+            margin-left: 20px; /* Added spacing for mobile menu */
         }
 
         .mobile-menu-btn:hover {
@@ -2043,6 +2046,7 @@
             text-decoration: underline;
         }
 
+        /* Form Styles */
         .form-group {
             margin-bottom: 25px;
         }
@@ -2075,7 +2079,102 @@
             resize: vertical;
         }
 
-        /* Social Media Section */
+        /* FormSpree Form Styles */
+        #contactForm {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 100%;
+        }
+
+        #contactForm label {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        #contactForm input,
+        #contactForm textarea {
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        #contactForm input:focus,
+        #contactForm textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-glow);
+        }
+
+        #contactForm button {
+            padding: 16px 32px;
+            background: var(--accent);
+            color: var(--primary-bg);
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        #contactForm button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition-slow);
+            z-index: -1;
+        }
+
+        #contactForm button:hover:before {
+            left: 100%;
+        }
+
+        #contactForm button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--accent-glow);
+        }
+
+        #status {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .status-success {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .status-error {
+            background: rgba(255, 0, 0, 0.1);
+            color: var(--youtube-red);
+            border: 1px solid var(--youtube-red);
+        }
+
+        /* Social Media Section - IMPROVED */
         .social-media {
             text-align: center;
             padding: 80px 0;
@@ -2764,7 +2863,8 @@
             }
             
             .logo {
-                margin-left: 0;
+                padding-left: 0;
+                margin-right: 40px; /* Smanjeno za mobile */
             }
             
             .partners-grid {
@@ -2848,6 +2948,7 @@
             
             .logo {
                 font-size: 1.8rem;
+                margin-right: 20px; /* Još manje za mobile */
             }
             
             .messenger-app-logo {
@@ -2945,72 +3046,72 @@
                             <span class="line-number">1</span>
                             <span class="code-tag">&lt;!DOCTYPE html&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="200">
+                        <div class="code-line" data-delay="100">
                             <span class="line-number">2</span>
                             <span class="code-tag">&lt;html</span> <span class="code-attr">lang</span>=<span class="code-value">"en"</span><span class="code-tag">&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="400">
+                        <div class="code-line" data-delay="200">
                             <span class="line-number">3</span>
                             <span class="code-tag">&lt;head&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="600">
+                        <div class="code-line" data-delay="300">
                             <span class="line-number">4</span>
                             <span class="code-indent"></span>
                             <span class="code-tag">&lt;meta</span> <span class="code-attr">charset</span>=<span class="code-value">"UTF-8"</span><span class="code-tag">&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="800">
+                        <div class="code-line" data-delay="400">
                             <span class="line-number">5</span>
                             <span class="code-indent"></span>
                             <span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-value">"viewport"</span> <span class="code-attr">content</span>=<span class="code-value">"width=device-width, initial-scale=1.0"</span><span class="code-tag">&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="1000">
+                        <div class="code-line" data-delay="500">
                             <span class="line-number">6</span>
                             <span class="code-indent"></span>
                             <span class="code-tag">&lt;title&gt;</span><span class="code-text">Your Business</span><span class="code-tag">&lt;/title&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="1200">
+                        <div class="code-line" data-delay="600">
                             <span class="line-number">7</span>
                             <span class="code-tag">&lt;/head&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="1400">
+                        <div class="code-line" data-delay="700">
                             <span class="line-number">8</span>
                             <span class="code-tag">&lt;body&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="1600">
+                        <div class="code-line" data-delay="800">
                             <span class="line-number">9</span>
                             <span class="code-indent"></span>
                             <span class="code-tag">&lt;header&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="1800">
+                        <div class="code-line" data-delay="900">
                             <span class="line-number">10</span>
                             <span class="code-indent-2"></span>
                             <span class="code-comment">&lt;!-- Navigation --&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="2000">
+                        <div class="code-line" data-delay="1000">
                             <span class="line-number">11</span>
                             <span class="code-indent"></span>
                             <span class="code-tag">&lt;/header&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="2200">
+                        <div class="code-line" data-delay="1100">
                             <span class="line-number">12</span>
                             <span class="code-indent"></span>
                             <span class="code-tag">&lt;main&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="2400">
+                        <div class="code-line" data-delay="1200">
                             <span class="line-number">13</span>
                             <span class="code-indent-2"></span>
                             <span class="code-comment">&lt;!-- Hero Section --&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="2600">
+                        <div class="code-line" data-delay="1300">
                             <span class="line-number">14</span>
                             <span class="code-indent"></span>
                             <span class="code-tag">&lt;/main&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="2800">
+                        <div class="code-line" data-delay="1400">
                             <span class="line-number">15</span>
                             <span class="code-tag">&lt;/body&gt;</span>
                         </div>
-                        <div class="code-line" data-delay="3000">
+                        <div class="code-line" data-delay="1500">
                             <span class="line-number">16</span>
                             <span class="code-tag">&lt;/html&gt;</span>
                             <span class="code-cursor"></span>
@@ -3022,7 +3123,7 @@
                     <div class="hero-content">
                         <h1 class="animate-text">Websites. Smarter. Faster.</h1>
                         <p class="animate-text" style="transition-delay: 0.2s">High-performance, beautifully crafted websites built to help your business stand out. Androva combines design excellence with seamless functionality.</p>
-                        <a href="#how-we-work" class="btn btn-glow animate-text" style="transition-delay: 0.4s">See How We Work</a>
+                        <a href="#pricing" class="btn btn-glow animate-text" style="transition-delay: 0.4s">Unlock Full Access</a>
                         
                         <div class="hero-stats animate-stagger">
                             <div class="stat">
@@ -3214,7 +3315,7 @@
                     </div>
                     <div class="video-container animate-scale" style="transition-delay: 0.4s">
                         <div class="video-wrapper">
-                            <iframe src="https://www.youtube.com/embed/PDCSRDTlhKU?si=Addb-a84eNV1n97V" title="YouTube video player" frameborder="0" allow="accelerometer; autplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/PDCSRDTlhKU?si=Addb-a84eNV1n97V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -3313,7 +3414,7 @@
                         
                         <div class="youtube-cta animate-text">
                             <p class="animate-text" style="transition-delay: 0.2s; margin-bottom: 30px; font-size: 1.3rem;">Content strategy that actually converts</p>
-                            <a href="https://www.youtube.com/@androvamedia" target="_blank" class="btn btn-youtube btn-glow animate-text" style="transition-delay: 0.4s">
+                            <a href="https://www.youtube.com/@androvatech" target="_blank" class="btn btn-youtube btn-glow animate-text" style="transition-delay: 0.4s">
                                 <i class="fab fa-youtube"></i> Start Your YouTube Growth
                             </a>
                             <p class="animate-text" style="transition-delay: 0.6s; margin-top: 20px; color: var(--text-secondary);">Book a Free Consultation Today!</p>
@@ -3597,45 +3698,35 @@
                             </div>
                         </div>
                         <div class="contact-form animate-slide-right">
-                            <form id="contactForm" class="animate-stagger">
-                                <div class="form-group">
-                                    <label for="name">Your Name</label>
-                                    <input type="text" id="name" class="form-control" required>
-                                    <div class="form-error">Please enter your name</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Your Email</label>
-                                    <input type="email" id="email" class="form-control" required>
-                                    <div class="form-error">Please enter a valid email</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="subject">Subject</label>
-                                    <input type="text" id="subject" class="form-control" required>
-                                    <div class="form-error">Please enter a subject</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="message">Your Message</label>
-                                    <textarea id="message" class="form-control" required></textarea>
-                                    <div class="form-error">Please enter your message</div>
-                                </div>
-                                <button type="submit" class="btn btn-glow">Send Message</button>
+                            <!-- Contact Us Form -->
+                            <form id="contactForm" action="https://formspree.io/f/mzzypbvj" method="POST">
+                                <label>
+                                    Your Name:
+                                    <input type="text" name="name" placeholder="Your Name" required>
+                                </label>
+                                <label>
+                                    Your Email:
+                                    <input type="email" name="email" placeholder="your@email.com" required>
+                                </label>
+                                <label>
+                                    Your Message:
+                                    <textarea name="message" placeholder="Write your message..." required></textarea>
+                                </label>
+                                <button type="submit">Send Message</button>
                             </form>
-                            <div class="form-success" id="formSuccess">
-                                <i class="fas fa-check-circle" style="color: var(--accent); font-size: 3rem; margin-bottom: 15px;"></i>
-                                <h3>Thank You!</h3>
-                                <p>Your message has been sent successfully. We'll get back to you soon.</p>
-                            </div>
+
+                            <p id="status"></p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Social Media Section -->
+            <!-- Social Media Section - IMPROVED -->
             <section class="social-media">
                 <div class="container">
                     <h2 class="animate-text">Follow Us</h2>
                     <div class="social-icons animate-stagger">
-                        <a href="https://www.youtube.com/@androvamedia" target="_blank" class="social-icon youtube">
+                        <a href="https://www.youtube.com/@androvatech" target="_blank" class="social-icon youtube">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
                             </svg>
@@ -3670,7 +3761,6 @@
                 <div class="footer-content animate-stagger">
                     <div class="footer-column animate-on-scroll">
                         <h3>ANDROVA</h3>
-                        <div class="coming-soon">Coming soon.</div>
                         <div class="messenger-section">
                             <img src="https://i.postimg.cc/bJvV8gQx/a-minimalist-flat-icon-logo-design-featu-Eji-R-6b-KQM2Ukf-Tf57IErg-AD-Ob-VUIThi-Madl-K7d8Pv-A.jpg" alt="Androva Messenger App" class="messenger-app-logo">
                             <span>Androva Messenger</span>
@@ -3749,7 +3839,7 @@
                 setTimeout(() => {
                     startCodeAnimationLoop();
                 }, 4000);
-            }, 1500);
+            }, 1000); // Reduced from 1500 to 1000 for faster appearance
         }
 
         function startCodeAnimationLoop() {
@@ -3977,94 +4067,6 @@
             });
         });
 
-        // Form validation and submission
-        const contactForm = document.getElementById('contactForm');
-        const formSuccess = document.getElementById('formSuccess');
-        
-        // Form validation function
-        function validateField(field) {
-            const value = field.value.trim();
-            const formGroup = field.parentElement;
-            
-            // Reset field state
-            formGroup.classList.remove('error', 'success');
-            
-            // Check if field is empty
-            if (value === '') {
-                formGroup.classList.add('error');
-                return false;
-            }
-            
-            // Email validation
-            if (field.type === 'email') {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(value)) {
-                    formGroup.classList.add('error');
-                    return false;
-                }
-            }
-            
-            // If validation passed
-            formGroup.classList.add('success');
-            return true;
-        }
-        
-        // Add event listeners for real-time validation
-        contactForm.querySelectorAll('input, textarea').forEach(field => {
-            field.addEventListener('blur', () => validateField(field));
-            field.addEventListener('input', () => {
-                // Remove error state when user starts typing
-                if (field.parentElement.classList.contains('error')) {
-                    field.parentElement.classList.remove('error');
-                }
-            });
-        });
-        
-        // Contact form submission
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validate all fields
-            const fields = contactForm.querySelectorAll('input, textarea');
-            let isValid = true;
-            
-            fields.forEach(field => {
-                if (!validateField(field)) {
-                    isValid = false;
-                }
-            });
-            
-            if (isValid) {
-                // Show loading state
-                const submitBtn = contactForm.querySelector('button[type="submit"]');
-                submitBtn.classList.add('loading');
-                submitBtn.disabled = true;
-                
-                // Simulate form submission
-                setTimeout(() => {
-                    // Hide form and show success message
-                    contactForm.style.display = 'none';
-                    formSuccess.classList.add('show');
-                    
-                    // Reset form
-                    contactForm.reset();
-                    contactForm.querySelectorAll('.form-group').forEach(group => {
-                        group.classList.remove('success');
-                    });
-                    
-                    // Reset button state
-                    submitBtn.classList.remove('loading');
-                    submitBtn.disabled = false;
-                    
-                    // Reset after 5 seconds (optional)
-                    setTimeout(() => {
-                        formSuccess.classList.remove('show');
-                        contactForm.style.display = 'block';
-                    }, 5000);
-                }, 1500);
-            }
-        });
-
         // FAQ Accordion
         const faqItems = document.querySelectorAll('.faq-item');
         
@@ -4082,6 +4084,36 @@
                 // Toggle current item
                 item.classList.toggle('active');
             });
+        });
+
+        // FormSpree Form Handling
+        const form = document.getElementById('contactForm');
+        const status = document.getElementById('status');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const data = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    status.innerText = "Message sent successfully!";
+                    status.className = "status-success";
+                    form.reset();
+                } else {
+                    status.innerText = "Oops! There was a problem sending your message.";
+                    status.className = "status-error";
+                }
+            } catch (err) {
+                status.innerText = "Oops! There was an error sending your message.";
+                status.className = "status-error";
+                console.error(err);
+            }
         });
     </script>
 </body>
