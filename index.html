@@ -1,10 +1,10 @@
-:<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Androva | Premium Web Design & Development</title>
-    <meta name="description" content="Androva creates high-performance, beautifully crafted websites that help businesses stand out. Professional web design, e-commerce solutions, and YouTube support services.">
+    <meta name="description" content="Androva creates high-performance, beautifully crafted websites that help businesses stand out. Professional web design, e-commerce solutions, and social media marketing services.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
@@ -899,14 +899,14 @@
             animation-delay: 1s;
         }
 
-        /* YouTube Support Section */
-        .youtube-support {
-            background: linear-gradient(135deg, #0a0e17 0%, #1a0f14 100%);
+        /* Social Media Marketing Section */
+        .social-media-marketing {
+            background: linear-gradient(135deg, #0a0e17 0%, #1a0f1f 100%);
             position: relative;
             overflow: hidden;
         }
 
-        .youtube-support:before {
+        .social-media-marketing:before {
             content: '';
             position: absolute;
             top: 0;
@@ -914,35 +914,35 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(ellipse at 20% 30%, rgba(255, 0, 0, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 70%, rgba(255, 0, 0, 0.1) 0%, transparent 50%);
+                radial-gradient(ellipse at 20% 30%, rgba(255, 105, 180, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(30, 144, 255, 0.1) 0%, transparent 50%);
             pointer-events: none;
         }
 
-        .youtube-content {
+        .social-media-content {
             text-align: center;
             max-width: 900px;
             margin: 0 auto;
         }
 
-        .youtube-content h2 {
+        .social-media-content h2 {
             font-size: 2.5rem;
             margin-bottom: 30px;
             font-weight: 800;
-            background: linear-gradient(135deg, var(--youtube-red) 0%, #ff6b6b 100%);
+            background: linear-gradient(135deg, #ff69b4 0%, #1e90ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .youtube-content p {
+        .social-media-content p {
             font-size: 1.2rem;
             color: var(--text-secondary);
             margin-bottom: 50px;
             line-height: 1.8;
         }
 
-        .youtube-stats {
+        .social-media-stats {
             display: flex;
             justify-content: center;
             gap: 40px;
@@ -950,7 +950,7 @@
             flex-wrap: wrap;
         }
 
-        .youtube-stat {
+        .social-media-stat {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -962,32 +962,53 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .youtube-stat:hover {
+        .social-media-stat:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.2);
-            border-color: rgba(255, 0, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.2);
+            border-color: rgba(255, 105, 180, 0.3);
         }
 
-        .youtube-stat-number {
+        .social-media-stat:nth-child(2):hover {
+            box-shadow: 0 15px 30px rgba(30, 144, 255, 0.2);
+            border-color: rgba(30, 144, 255, 0.3);
+        }
+
+        .social-media-stat:nth-child(3):hover {
+            box-shadow: 0 15px 30px rgba(50, 205, 50, 0.2);
+            border-color: rgba(50, 205, 50, 0.3);
+        }
+
+        .social-media-stat-number {
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--youtube-red);
             margin-bottom: 10px;
         }
 
-        .youtube-stat-label {
+        .social-media-stat:nth-child(1) .social-media-stat-number {
+            color: #ff69b4;
+        }
+
+        .social-media-stat:nth-child(2) .social-media-stat-number {
+            color: #1e90ff;
+        }
+
+        .social-media-stat:nth-child(3) .social-media-stat-number {
+            color: #32cd32;
+        }
+
+        .social-media-stat-label {
             font-size: 1rem;
             color: var(--text-secondary);
         }
 
-        .youtube-features {
+        .social-media-features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-bottom: 50px;
         }
 
-        .youtube-feature {
+        .social-media-feature {
             background: var(--card-bg);
             padding: 40px 30px;
             border-radius: var(--border-radius);
@@ -998,61 +1019,140 @@
             overflow: hidden;
         }
 
-        .youtube-feature:hover {
+        .social-media-feature:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.2);
-            border-color: rgba(255, 0, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.2);
+            border-color: rgba(255, 105, 180, 0.3);
         }
 
-        .youtube-feature:before {
+        .social-media-feature:nth-child(2):hover {
+            box-shadow: 0 15px 30px rgba(30, 144, 255, 0.2);
+            border-color: rgba(30, 144, 255, 0.3);
+        }
+
+        .social-media-feature:nth-child(3):hover {
+            box-shadow: 0 15px 30px rgba(50, 205, 50, 0.2);
+            border-color: rgba(50, 205, 50, 0.3);
+        }
+
+        .social-media-feature:nth-child(4):hover {
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .social-media-feature:nth-child(5):hover {
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.2);
+            border-color: rgba(138, 43, 226, 0.3);
+        }
+
+        .social-media-feature:nth-child(6):hover {
+            box-shadow: 0 15px 30px rgba(255, 69, 0, 0.2);
+            border-color: rgba(255, 69, 0, 0.3);
+        }
+
+        .social-media-feature:before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--youtube-red), transparent);
+            background: linear-gradient(90deg, #ff69b4, transparent);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.5s ease;
         }
 
-        .youtube-feature:hover:before {
+        .social-media-feature:nth-child(1):before {
+            background: linear-gradient(90deg, #ff69b4, transparent);
+        }
+
+        .social-media-feature:nth-child(2):before {
+            background: linear-gradient(90deg, #1e90ff, transparent);
+        }
+
+        .social-media-feature:nth-child(3):before {
+            background: linear-gradient(90deg, #32cd32, transparent);
+        }
+
+        .social-media-feature:nth-child(4):before {
+            background: linear-gradient(90deg, #ffd700, transparent);
+        }
+
+        .social-media-feature:nth-child(5):before {
+            background: linear-gradient(90deg, #8a2be2, transparent);
+        }
+
+        .social-media-feature:nth-child(6):before {
+            background: linear-gradient(90deg, #ff4500, transparent);
+        }
+
+        .social-media-feature:hover:before {
             transform: scaleX(1);
         }
 
-        .youtube-feature-icon {
+        .social-media-feature-icon {
             width: 70px;
             height: 70px;
             border-radius: 50%;
-            background: var(--youtube-red);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 25px;
             font-size: 1.8rem;
             color: white;
-            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        .youtube-feature h3 {
+        .social-media-feature:nth-child(1) .social-media-feature-icon {
+            background: #ff69b4;
+            box-shadow: 0 10px 20px rgba(255, 105, 180, 0.3);
+        }
+
+        .social-media-feature:nth-child(2) .social-media-feature-icon {
+            background: #1e90ff;
+            box-shadow: 0 10px 20px rgba(30, 144, 255, 0.3);
+        }
+
+        .social-media-feature:nth-child(3) .social-media-feature-icon {
+            background: #32cd32;
+            box-shadow: 0 10px 20px rgba(50, 205, 50, 0.3);
+        }
+
+        .social-media-feature:nth-child(4) .social-media-feature-icon {
+            background: #ffd700;
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .social-media-feature:nth-child(5) .social-media-feature-icon {
+            background: #8a2be2;
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+        }
+
+        .social-media-feature:nth-child(6) .social-media-feature-icon {
+            background: #ff4500;
+            box-shadow: 0 10px 20px rgba(255, 69, 0, 0.3);
+        }
+
+        .social-media-feature h3 {
             font-size: 1.5rem;
             margin-bottom: 15px;
             font-weight: 700;
         }
 
-        .youtube-feature p {
+        .social-media-feature p {
             color: var(--text-secondary);
             font-size: 1rem;
             line-height: 1.6;
         }
 
-        .youtube-cta {
+        .social-media-cta {
             text-align: center;
             margin-top: 50px;
         }
 
-        .premiere-logo {
+        .social-media-animation {
             margin-top: 30px;
             display: flex;
             justify-content: center;
@@ -1060,16 +1160,101 @@
             animation: logoFloat 3s ease-in-out infinite;
         }
 
-        .premiere-logo img {
+        .social-media-animation img {
             width: 80px;
             height: 80px;
-            filter: drop-shadow(0 0 10px rgba(0, 245, 255, 0.5));
+            filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.5));
             transition: var(--transition);
         }
 
-        .premiere-logo:hover img {
+        .social-media-animation:hover img {
             transform: scale(1.1);
-            filter: drop-shadow(0 0 15px rgba(0, 245, 255, 0.8));
+            filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.8));
+        }
+
+        /* Social Media Platforms Animation */
+        .platforms-animation {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .platform-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            animation: platformFloat 4s ease-in-out infinite;
+        }
+
+        .platform-icon:nth-child(1) {
+            background: linear-gradient(135deg, #4267B2, #365899);
+            box-shadow: 0 10px 20px rgba(66, 103, 178, 0.3);
+            animation-delay: 0s;
+        }
+
+        .platform-icon:nth-child(2) {
+            background: linear-gradient(135deg, #000000, #657786);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            animation-delay: 0.5s;
+        }
+
+        .platform-icon:nth-child(3) {
+            background: linear-gradient(135deg, #E1306C, #C13584);
+            box-shadow: 0 10px 20px rgba(225, 48, 108, 0.3);
+            animation-delay: 1s;
+        }
+
+        .platform-icon:nth-child(4) {
+            background: linear-gradient(135deg, #0077B5, #006699);
+            box-shadow: 0 10px 20px rgba(0, 119, 181, 0.3);
+            animation-delay: 1.5s;
+        }
+
+        .platform-icon:nth-child(5) {
+            background: linear-gradient(135deg, #FF0000, #CC0000);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+            animation-delay: 2s;
+        }
+
+        .platform-icon:nth-child(6) {
+            background: linear-gradient(135deg, #69C9D0, #EE1D52);
+            box-shadow: 0 10px 20px rgba(105, 201, 208, 0.3);
+            animation-delay: 2.5s;
+        }
+
+        .platform-icon:hover {
+            transform: translateY(-10px) scale(1.1);
+            animation-play-state: paused;
+        }
+
+        @keyframes platformFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Social Media Marketing Button */
+        .btn-social-media {
+            background: linear-gradient(135deg, #ff69b4, #1e90ff);
+            color: white;
+        }
+
+        .btn-social-media:hover {
+            background: linear-gradient(135deg, #ff4da6, #0077ea);
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4);
         }
 
         /* Pricing Section */
@@ -2848,12 +3033,12 @@
                 flex-direction: column;
             }
 
-            .youtube-stats {
+            .social-media-stats {
                 flex-direction: column;
                 align-items: center;
             }
 
-            .youtube-stat {
+            .social-media-stat {
                 min-width: 200px;
             }
 
@@ -3005,7 +3190,7 @@
                         <li><a href="#how-we-work">How We Work</a></li>
                         <li><a href="#video">Our Work</a></li>
                         <li><a href="#ecommerce-solutions">E-commerce Solutions</a></li>
-                        <li><a href="#youtube-support">YouTube Support</a></li>
+                        <li><a href="#social-media-marketing">Social Media Marketing</a></li>
                         <li><a href="#pricing">Pricing</a></li>
                         <li><a href="#testimonials">Testimonials</a></li>
                         <li><a href="#partners">Partners</a></li>
@@ -3345,81 +3530,104 @@
                 </div>
             </section>
 
-            <!-- YouTube Support Section -->
-            <section id="youtube-support" class="youtube-support">
+            <!-- Social Media Marketing Section -->
+            <section id="social-media-marketing" class="social-media-marketing">
                 <div class="container">
-                    <div class="youtube-content">
-                        <h2 class="animate-text">Full YouTube Support</h2>
-                        <p class="animate-text" style="transition-delay: 0.2s">Take your YouTube channel to the next level with our comprehensive support services. From content creation to channel growth strategies, we help creators build engaged audiences and maximize their impact.</p>
+                    <div class="social-media-content">
+                        <h2 class="animate-text">Social Media Marketing</h2>
+                        <p class="animate-text" style="transition-delay: 0.2s">Amplify your brand's voice and reach with our comprehensive social media marketing services. We create engaging content, build communities, and drive measurable results across all major platforms.</p>
                         
-                        <div class="youtube-stats animate-stagger">
-                            <div class="youtube-stat">
-                                <div class="youtube-stat-number">10,000+</div>
-                                <div class="youtube-stat-label">Subscribers Helped</div>
+                        <div class="platforms-animation animate-stagger">
+                            <div class="platform-icon">
+                                <i class="fab fa-facebook-f"></i>
                             </div>
-                            <div class="youtube-stat">
-                                <div class="youtube-stat-number">500+</div>
-                                <div class="youtube-stat-label">Videos Optimized</div>
+                            <div class="platform-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="40" viewBox="0 0 50 50" fill="white">
+                                    <path d="M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z"></path>
+                                </svg>
                             </div>
-                            <div class="youtube-stat">
-                                <div class="youtube-stat-number">99%</div>
-                                <div class="youtube-stat-label">Client Satisfaction</div>
+                            <div class="platform-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div class="platform-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div class="platform-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <div class="platform-icon">
+                                <i class="fab fa-tiktok"></i>
                             </div>
                         </div>
                         
-                        <div class="youtube-features animate-stagger">
-                            <div class="youtube-feature">
-                                <div class="youtube-feature-icon">
-                                    <i class="fas fa-lightbulb"></i>
-                                </div>
-                                <h3>Content Ideas & Video Concepts</h3>
-                                <p>Strategic content planning and creative video concepts tailored to your niche and audience.</p>
+                        <div class="social-media-stats animate-stagger">
+                            <div class="social-media-stat">
+                                <div class="social-media-stat-number">500+</div>
+                                <div class="social-media-stat-label">Campaigns Managed</div>
                             </div>
-                            <div class="youtube-feature">
-                                <div class="youtube-feature-icon">
-                                    <i class="fas fa-scroll"></i>
-                                </div>
-                                <h3>Scriptwriting & Storyboarding</h3>
-                                <p>Professional script development and visual storyboarding for engaging, structured content.</p>
+                            <div class="social-media-stat">
+                                <div class="social-media-stat-number">2M+</div>
+                                <div class="social-media-stat-label">Impressions Generated</div>
                             </div>
-                            <div class="youtube-feature">
-                                <div class="youtube-feature-icon">
-                                    <i class="fas fa-film"></i>
-                                </div>
-                                <h3>Video Editing & Post-Production</h3>
-                                <p>High-quality editing, color grading, audio enhancement, and visual effects for polished videos.</p>
+                            <div class="social-media-stat">
+                                <div class="social-media-stat-number">45%</div>
+                                <div class="social-media-stat-label">Average Engagement Increase</div>
                             </div>
-                            <div class="youtube-feature">
-                                <div class="youtube-feature-icon">
-                                    <i class="fas fa-search"></i>
-                                </div>
-                                <h3>SEO & Optimization</h3>
-                                <p>Advanced YouTube SEO, keyword research, and optimization strategies to boost visibility.</p>
-                            </div>
-                            <div class="youtube-feature">
-                                <div class="youtube-feature-icon">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
-                                <h3>Full Channel Management</h3>
-                                <p>Complete channel management including upload scheduling, community engagement, and analytics.</p>
-                            </div>
-                            <div class="youtube-feature">
-                                <div class="youtube-feature-icon">
+                        </div>
+                        
+                        <div class="social-media-features animate-stagger">
+                            <div class="social-media-feature">
+                                <div class="social-media-feature-icon">
                                     <i class="fas fa-bullhorn"></i>
                                 </div>
-                                <h3>Growth Strategy</h3>
-                                <p>Data-driven growth strategies, audience analysis, and performance optimization techniques.</p>
+                                <h3>Content Strategy</h3>
+                                <p>Strategic content planning and creation tailored to your brand voice and audience preferences.</p>
+                            </div>
+                            <div class="social-media-feature">
+                                <div class="social-media-feature-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3>Analytics & Reporting</h3>
+                                <p>Comprehensive performance tracking and detailed reports to measure ROI and optimize campaigns.</p>
+                            </div>
+                            <div class="social-media-feature">
+                                <div class="social-media-feature-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3>Community Management</h3>
+                                <p>Active engagement with your audience to build loyal communities and foster brand advocacy.</p>
+                            </div>
+                            <div class="social-media-feature">
+                                <div class="social-media-feature-icon">
+                                    <i class="fas fa-ad"></i>
+                                </div>
+                                <h3>Paid Advertising</h3>
+                                <p>Targeted ad campaigns across social platforms to maximize reach and drive conversions.</p>
+                            </div>
+                            <div class="social-media-feature">
+                                <div class="social-media-feature-icon">
+                                    <i class="fas fa-video"></i>
+                                </div>
+                                <h3>Video Content</h3>
+                                <p>Engaging video content creation optimized for each platform's algorithm and user behavior.</p>
+                            </div>
+                            <div class="social-media-feature">
+                                <div class="social-media-feature-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <h3>Influencer Partnerships</h3>
+                                <p>Strategic collaborations with influencers to expand reach and build credibility.</p>
                             </div>
                         </div>
                         
-                        <div class="youtube-cta animate-text">
-                            <p class="animate-text" style="transition-delay: 0.2s; margin-bottom: 30px; font-size: 1.3rem;">Content strategy that actually converts</p>
-                            <a href="https://www.youtube.com/@androvatech" target="_blank" class="btn btn-youtube btn-glow animate-text" style="transition-delay: 0.4s">
-                                <i class="fab fa-youtube"></i> Start Your YouTube Growth
+                        <div class="social-media-cta animate-text">
+                            <p class="animate-text" style="transition-delay: 0.2s; margin-bottom: 30px; font-size: 1.3rem;">Ready to dominate social media?</p>
+                            <a href="#contact" class="btn btn-social-media btn-glow animate-text" style="transition-delay: 0.4s">
+                                <i class="fas fa-rocket"></i> Boost Your Social Presence
                             </a>
-                            <p class="animate-text" style="transition-delay: 0.6s; margin-top: 20px; color: var(--text-secondary);">Book a Free Consultation Today!</p>
-                            <div class="premiere-logo animate-text" style="transition-delay: 0.8s;">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/512px-Adobe_Premiere_Pro_CC_icon.svg.png?20210729021549" alt="Adobe Premiere Pro">
+                            <p class="animate-text" style="transition-delay: 0.6s; margin-top: 20px; color: var(--text-secondary);">Book a Free Strategy Session Today!</p>
+                            <div class="social-media-animation animate-text" style="transition-delay: 0.8s;">
+                                <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Social Media">
                             </div>
                         </div>
                     </div>
@@ -3726,7 +3934,8 @@
                 <div class="container">
                     <h2 class="animate-text">Follow Us</h2>
                     <div class="social-icons animate-stagger">
-                        <a href="https://www.youtube.com/@androvatech" target="_blank" class="social-icon youtube">
+                        <!-- AŽURIRANI DIO: Promijenjen YouTube link -->
+                        <a href="https://www.youtube.com/@androvamedia" target="_blank" class="social-icon youtube">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
                             </svg>
@@ -3774,7 +3983,7 @@
                         <a href="#how-we-work">How We Work</a>
                         <a href="#video">Our Work</a>
                         <a href="#ecommerce-solutions">E-commerce Solutions</a>
-                        <a href="#youtube-support">YouTube Support</a>
+                        <a href="#social-media-marketing">Social Media Marketing</a>
                         <a href="#pricing">Pricing</a>
                         <a href="#testimonials">Testimonials</a>
                         <a href="#partners">Partners</a>
