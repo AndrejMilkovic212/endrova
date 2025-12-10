@@ -1271,7 +1271,57 @@
             box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4);
         }
 
-        /* Pricing Section */
+        /* Pricing Section - NOVI STILOVI */
+        .pricing-section-subtitle {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .pricing-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-tab {
+            padding: 12px 30px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .pricing-tab:hover {
+            background: rgba(0, 245, 255, 0.1);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .pricing-tab.active {
+            background: var(--accent);
+            color: var(--primary-bg);
+            border-color: var(--accent);
+        }
+
+        .pricing-content {
+            display: none;
+        }
+
+        .pricing-content.active {
+            display: block;
+        }
+
         .pricing-cards {
             display: flex;
             justify-content: center;
@@ -1317,13 +1367,57 @@
             font-weight: 700;
         }
 
+        .pricing-card .description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            min-height: 60px;
+        }
+
+        .price-container {
+            margin: 25px 0;
+            position: relative;
+        }
+
         .price {
             font-size: 3rem;
             font-weight: 800;
-            margin: 25px 0;
             color: var(--accent);
             display: flex;
             align-items: flex-start;
+        }
+
+        .old-price {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: line-through;
+            margin-right: 10px;
+            position: absolute;
+            top: -10px;
+        }
+
+        .price-savings {
+            font-size: 0.9rem;
+            color: #32cd32;
+            font-weight: 600;
+            margin-left: 10px;
+            background: rgba(50, 205, 50, 0.1);
+            padding: 3px 8px;
+            border-radius: 20px;
+            align-self: center;
+        }
+
+        .delivery-time {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .delivery-time i {
+            color: var(--accent);
         }
 
         .features {
@@ -1352,7 +1446,27 @@
             font-size: 1.1rem;
         }
 
-        .plan-badge {
+        .pricing-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-contact {
+            background: transparent;
+            border: 2px solid var(--text-secondary);
+            color: var(--text-secondary);
+        }
+
+        .btn-contact:hover {
+            background: var(--text-secondary);
+            color: var(--primary-bg);
+            border-color: var(--text-secondary);
+        }
+
+        /* Badges for pricing cards */
+        .popular-badge {
             position: absolute;
             top: 25px;
             right: -35px;
@@ -1363,6 +1477,19 @@
             font-size: 0.9rem;
             font-weight: 700;
             box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+        }
+
+        .best-value-badge {
+            position: absolute;
+            top: 25px;
+            right: -35px;
+            background: #ff69b4;
+            color: white;
+            padding: 8px 40px;
+            transform: rotate(45deg);
+            font-size: 0.9rem;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
         }
 
         /* How We Work Section */
@@ -2889,26 +3016,6 @@
             transform: scale(1.2) rotate(10deg);
         }
 
-        /* Contact Us Button in Pricing Cards */
-        .pricing-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .btn-contact {
-            background: transparent;
-            border: 2px solid var(--text-secondary);
-            color: var(--text-secondary);
-        }
-
-        .btn-contact:hover {
-            background: var(--text-secondary);
-            color: var(--primary-bg);
-            border-color: var(--text-secondary);
-        }
-
         /* Responsive Design */
         @media (min-width: 1200px) {
             .code-animation {
@@ -3333,7 +3440,7 @@
                     <div class="hero-content">
                         <h1 class="animate-text">Websites. Smarter. Faster.</h1>
                         <p class="animate-text" style="transition-delay: 0.2s">High-performance, beautifully crafted websites built to help your business stand out. Androva combines design excellence with seamless functionality.</p>
-                        <a href="#pricing" class="btn btn-glow animate-text" style="transition-delay: 0.4s">Unlock Full Access</a>
+                        <a href="#pricing" class="btn btn-glow animate-text" style="transition-delay: 0.4s">View Pricing Plans</a>
                         
                         <div class="hero-stats animate-stagger">
                             <div class="stat">
@@ -3343,6 +3450,10 @@
                             <div class="stat">
                                 <div class="stat-number">99%</div>
                                 <div class="stat-label">Client Satisfaction</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">24h</div>
+                                <div class="stat-label">Quickest Delivery</div>
                             </div>
                         </div>
                     </div>
@@ -3430,15 +3541,15 @@
                                                 <div class="code-line">
                                                     <span class="line-number">15</span>
                                                     <span class="code-tag">&lt;/main&gt;</span>
-                                                </div>
-                                                <div class="code-line">
-                                                    <span class="line-number">16</span>
-                                                    <span class="code-tag">&lt;/body&gt;</span>
-                                                </div>
-                                                <div class="code-line">
-                                                    <span class="line-number">17</span>
-                                                    <span class="code-tag">&lt;/html&gt;</span>
-                                                </div>
+                </div>
+                <div class="code-line">
+                    <span class="line-number">16</span>
+                    <span class="code-tag">&lt;/body&gt;</span>
+                </div>
+                <div class="code-line">
+                    <span class="line-number">17</span>
+                    <span class="code-tag">&lt;/html&gt;</span>
+                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3655,69 +3766,257 @@
                 </div>
             </section>
 
-            <!-- Pricing Section -->
+            <!-- Pricing Section - NOVI PLANOVI -->
             <section id="pricing">
                 <div class="container">
-                    <h2 class="section-title animate-text">Pricing Plans</h2>
-                    <div class="pricing-cards animate-stagger">
-                        <div class="pricing-card animate-on-scroll">
-                            <h3>Basic</h3>
-                            <div class="price">€25</div>
-                            <p>Perfect for small businesses starting their online presence</p>
-                            <ul class="features">
-                                <li>1-Page Professional Website</li>
-                                <li>Basic Hosting Included</li>
-                                <li>Mobile Responsive Design</li>
-                                <li>Contact Form Integration</li>
-                                <li>Basic SEO Setup</li>
-                                <li>Email Support</li>
-                            </ul>
-                            <div class="pricing-actions">
-                                <a href="mailto:androvatech@gmail.com" class="btn btn-contact">Contact Us</a>
-                                <a href="https://buy.stripe.com/test_9B600i9iB58Kbrt1Oe0Fi01" target="_blank" class="btn btn-secondary">Unlock Full Access</a>
+                    <h2 class="section-title animate-text">Professional Pricing Plans</h2>
+                    <p class="pricing-section-subtitle animate-text" style="transition-delay: 0.2s;">
+                        Transparent prices for professional results. All packages include free consultation and support. 
+                        Prices are in EUR and do not include VAT (25%).
+                    </p>
+                    
+                    <!-- Pricing Tabs -->
+                    <div class="pricing-tabs animate-stagger">
+                        <div class="pricing-tab active" data-tab="websites">Websites</div>
+                        <div class="pricing-tab" data-tab="ecommerce">E-commerce</div>
+                    </div>
+                    
+                    <!-- WEBSITES Pricing Content -->
+                    <div class="pricing-content active" id="websites-content">
+                        <div class="pricing-cards animate-stagger">
+                            <!-- STARTER PAKET -->
+                            <div class="pricing-card animate-on-scroll">
+                                <h3>Starter</h3>
+                                <p class="description">Perfect for startups, freelancers, and small local businesses</p>
+                                
+                                <div class="price-container">
+                                    <span class="old-price">€990</span>
+                                    <div class="price">€790</div>
+                                    <span class="price-savings">Save €200</span>
+                                </div>
+                                
+                                <div class="delivery-time">
+                                    <i class="fas fa-clock"></i>
+                                    Delivery: 7-10 business days
+                                </div>
+                                
+                                <ul class="features">
+                                    <li>One-page landing page (max 6 sections)</li>
+                                    <li>Responsive mobile-friendly design</li>
+                                    <li>Contact form integration</li>
+                                    <li>Basic SEO setup</li>
+                                    <li>Google Analytics integration</li>
+                                    <li>2 design revisions</li>
+                                    <li>30 days support</li>
+                                </ul>
+                                
+                                <div class="pricing-actions">
+                                    <a href="mailto:androvatech@gmail.com?subject=Starter Package Inquiry&body=I'm interested in the Starter package for €790" class="btn btn-contact">
+                                        <i class="fas fa-envelope"></i> Get Quote
+                                    </a>
+                                    <a href="https://buy.stripe.com/test_14A8wO52lgRs535gJ80Fi06" target="_blank" class="btn btn-secondary">
+                                        <i class="fas fa-shopping-cart"></i> Order Now
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- BUSINESS PAKET -->
+                            <div class="pricing-card featured animate-on-scroll">
+                                <div class="popular-badge">MOST POPULAR</div>
+                                <h3>Business</h3>
+                                <p class="description">Ideal for medium businesses, service providers, and agencies</p>
+                                
+                                <div class="price-container">
+                                    <span class="old-price">€2,490</span>
+                                    <div class="price">€1,990</div>
+                                    <span class="price-savings">Save €500</span>
+                                </div>
+                                
+                                <div class="delivery-time">
+                                    <i class="fas fa-clock"></i>
+                                    Delivery: 3-4 weeks
+                                </div>
+                                
+                                <ul class="features">
+                                    <li>Up to 5 pages (Home, About, Services, Portfolio, Contact)</li>
+                                    <li>Custom design based on branding</li>
+                                    <li>Contact form + newsletter integration</li>
+                                    <li>WordPress CMS for easy updates</li>
+                                    <li>Medium SEO optimization</li>
+                                    <li>Speed optimization (90+ PageSpeed)</li>
+                                    <li>Social media integration</li>
+                                    <li>3 design revisions</li>
+                                    <li>60 days support</li>
+                                </ul>
+                                
+                                <div class="pricing-actions">
+                                    <a href="mailto:androvatech@gmail.com?subject=Business Package Inquiry&body=I'm interested in the Business package for €1,990" class="btn btn-contact">
+                                        <i class="fas fa-envelope"></i> Get Quote
+                                    </a>
+                                    <a href="https://buy.stripe.com/test_9B63cu2UdfNo7bd64u0Fi07" target="_blank" class="btn btn-glow">
+                                        <i class="fas fa-shopping-cart"></i> Order Now
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- PREMIUM PAKET -->
+                            <div class="pricing-card animate-on-scroll">
+                                <div class="best-value-badge">BEST VALUE</div>
+                                <h3>Premium</h3>
+                                <p class="description">Complete solution for established companies and specialized services</p>
+                                
+                                <div class="price-container">
+                                    <span class="old-price">€3,990</span>
+                                    <div class="price">€3,490</div>
+                                    <span class="price-savings">Save €500</span>
+                                </div>
+                                
+                                <div class="delivery-time">
+                                    <i class="fas fa-clock"></i>
+                                    Delivery: 4-5 weeks
+                                </div>
+                                
+                                <ul class="features">
+                                    <li>Up to 10 pages with custom layout</li>
+                                    <li>Advanced UX/UI design with prototype</li>
+                                    <li>Full WordPress CMS with custom post types</li>
+                                    <li>Advanced SEO (schema markup, sitemap)</li>
+                                    <li>Performance optimization (CDN, caching)</li>
+                                    <li>Google My Business integration</li>
+                                    <li>Multilingual ready (1 language)</li>
+                                    <li>5 design revisions</li>
+                                    <li>6 months support</li>
+                                    <li>CMS training (1 hour)</li>
+                                </ul>
+                                
+                                <div class="pricing-actions">
+                                    <a href="mailto:androvatech@gmail.com?subject=Premium Package Inquiry&body=I'm interested in the Premium package for €3,490" class="btn btn-contact">
+                                        <i class="fas fa-envelope"></i> Get Quote
+                                    </a>
+                                    <a href="https://buy.stripe.com/test_bJebJ03YhcBc2UX8cC0Fi08" target="_blank" class="btn btn-secondary">
+                                        <i class="fas fa-shopping-cart"></i> Order Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="pricing-card featured animate-on-scroll">
-                            <div class="plan-badge">Most Popular</div>
-                            <h3>Starter</h3>
-                            <div class="price">€100</div>
-                            <p>Ideal for growing businesses with more complex needs</p>
-                            <ul class="features">
-                                <li>5-Page Professional Website</li>
-                                <li>Premium Hosting Included</li>
-                                <li>Mobile Responsive Design</li>
-                                <li>Contact Form & Booking System</li>
-                                <li>Advanced SEO Optimization</li>
-                                <li>Monthly Content Updates (2 pages)</li>
-                                <li>Priority Email & Chat Support</li>
-                                <li>Basic Analytics Dashboard</li>
-                            </ul>
-                            <div class="pricing-actions">
-                                <a href="mailto:androvatech@gmail.com" class="btn btn-contact">Contact Us</a>
-                                <a href="https://buy.stripe.com/test_dRm28q8ex9p0anp1Oe0Fi00" target="_blank" class="btn btn-glow">Unlock Full Access</a>
+                    </div>
+                    
+                    <!-- E-COMMERCE Pricing Content -->
+                    <div class="pricing-content" id="ecommerce-content">
+                        <div class="pricing-cards animate-stagger">
+                            <!-- BASIC SHOP -->
+                            <div class="pricing-card animate-on-scroll">
+                                <h3>Basic Shop</h3>
+                                <p class="description">For small webshops with up to 50 products</p>
+                                
+                                <div class="price-container">
+                                    <div class="price">€2,490</div>
+                                </div>
+                                
+                                <div class="delivery-time">
+                                    <i class="fas fa-clock"></i>
+                                    Delivery: 4-5 weeks
+                                </div>
+                                
+                                <ul class="features">
+                                    <li>WooCommerce/Shopify setup</li>
+                                    <li>Up to 50 products</li>
+                                    <li>Payment integration (Stripe/PayPal)</li>
+                                    <li>Basic categories</li>
+                                    <li>Responsive design</li>
+                                    <li>Inventory management</li>
+                                    <li>90 days support</li>
+                                </ul>
+                                
+                                <div class="pricing-actions">
+                                    <a href="mailto:androvatech@gmail.com?subject=Basic Shop Inquiry&body=I'm interested in the Basic Shop package for €2,490" class="btn btn-contact">
+                                        <i class="fas fa-envelope"></i> Get Quote
+                                    </a>
+                                    <a href="https://buy.stripe.com/test_28EcN43Yh7gScvxdwW0Fi09" target="_blank" class="btn btn-secondary">
+                                        <i class="fas fa-shopping-cart"></i> Order Now
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- PRO SHOP -->
+                            <div class="pricing-card featured animate-on-scroll">
+                                <div class="popular-badge">RECOMMENDED</div>
+                                <h3>Pro Shop</h3>
+                                <p class="description">For medium webshops with up to 500 products</p>
+                                
+                                <div class="price-container">
+                                    <div class="price">€4,990</div>
+                                </div>
+                                
+                                <div class="delivery-time">
+                                    <i class="fas fa-clock"></i>
+                                    Delivery: 6-8 weeks
+                                </div>
+                                
+                                <ul class="features">
+                                    <li>Custom WooCommerce/Shopify theme</li>
+                                    <li>Up to 500 products with variations</li>
+                                    <li>Multiple payment gateways</li>
+                                    <li>Advanced filtering & search</li>
+                                    <li>Shipping integration</li>
+                                    <li>Customer accounts</li>
+                                    <li>Discount & coupon system</li>
+                                    <li>Abandoned cart recovery</li>
+                                    <li>6 months support</li>
+                                </ul>
+                                
+                                <div class="pricing-actions">
+                                    <a href="mailto:androvatech@gmail.com?subject=Pro Shop Inquiry&body=I'm interested in the Pro Shop package for €4,990" class="btn btn-contact">
+                                        <i class="fas fa-envelope"></i> Get Quote
+                                    </a>
+                                    <a href="https://buy.stripe.com/test_28E28qcuN8kWdzBeB00Fi0a" target="_blank" class="btn btn-glow">
+                                        <i class="fas fa-shopping-cart"></i> Order Now
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- ENTERPRISE E-COMMERCE -->
+                            <div class="pricing-card animate-on-scroll">
+                                <div class="best-value-badge">ENTERPRISE</div>
+                                <h3>Enterprise</h3>
+                                <p class="description">For large webshops and brands</p>
+                                
+                                <div class="price-container">
+                                    <div class="price">€8,990</div>
+                                </div>
+                                
+                                <div class="delivery-time">
+                                    <i class="fas fa-clock"></i>
+                                    Custom timeline
+                                </div>
+                                
+                                <ul class="features">
+                                    <li>Fully custom solution</li>
+                                    <li>Unlimited products</li>
+                                    <li>ERP/CRM integration</li>
+                                    <li>Multi-warehouse inventory</li>
+                                    <li>Advanced reporting dashboard</li>
+                                    <li>Subscription system</li>
+                                    <li>Mobile app integration</li>
+                                    <li>Priority support (12 months)</li>
+                                    <li>Custom development</li>
+                                </ul>
+                                
+                                <div class="pricing-actions">
+                                    <a href="mailto:androvatech@gmail.com?subject=Enterprise E-commerce Inquiry&body=I'm interested in the Enterprise E-commerce solution for €8,990" class="btn btn-contact">
+                                        <i class="fas fa-envelope"></i> Get Quote
+                                    </a>
+                                    <a href="https://buy.stripe.com/test_4gMdR87at8kWgLNeB00Fi0b" target="_blank" class="btn btn-secondary">
+                                        <i class="fas fa-shopping-cart"></i> Order Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="pricing-card animate-on-scroll">
-                            <h3>Pro</h3>
-                            <div class="price">€250</div>
-                            <p>Complete solution for established businesses</p>
-                            <ul class="features">
-                                <li>Unlimited Page Website</li>
-                                <li>Enterprise Hosting Included</li>
-                                <li>Advanced Mobile Optimization</li>
-                                <li>E-commerce Functionality</li>
-                                <li>AI Content Creation & Optimization</li>
-                                <li>Unlimited Content Updates</li>
-                                <li>24/7 Priority Support</li>
-                                <li>Advanced Analytics & Reporting</li>
-                                <li>Monthly Performance Reviews</li>
-                                <li>SSL Certificate Included</li>
-                            </ul>
-                            <div class="pricing-actions">
-                                <a href="mailto:androvatech@gmail.com" class="btn btn-contact">Contact Us</a>
-                                <a href="https://buy.stripe.com/test_7sY5kCamF9p0679fF40Fi02" target="_blank" class="btn btn-secondary">Unlock Full Access</a>
-                            </div>
-                        </div>
+                    </div>
+                    
+                    <div class="payment-info animate-text" style="text-align: center; margin-top: 50px; color: var(--text-secondary); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                        <p><i class="fas fa-lock" style="color: var(--accent);"></i> Secure payment via Stripe. 50% deposit required to start project. Balance due before final delivery.</p>
+                        <p style="margin-top: 10px;"><i class="fas fa-file-contract" style="color: var(--accent);"></i> All projects include a formal contract and project timeline.</p>
                     </div>
                 </div>
             </section>
@@ -3846,7 +4145,7 @@
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                             <div class="faq-answer">
-                                <p>No. You pay once, and the website is yours — fully and permanently.</p>
+                                <p>No. You pay once, and the website is yours — fully and permanently. We offer optional maintenance packages if you need ongoing support.</p>
                             </div>
                         </div>
                         <div class="faq-item animate-on-scroll">
@@ -3855,7 +4154,7 @@
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                             <div class="faq-answer">
-                                <p>Yes. We offer optional support and update packages if you need ongoing adjustments.</p>
+                                <p>Yes. We offer optional support and update packages if you need ongoing adjustments. All packages include a support period.</p>
                             </div>
                         </div>
                         <div class="faq-item animate-on-scroll">
@@ -3882,7 +4181,7 @@
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                             <div class="faq-answer">
-                                <p>Yes — we can assist with setup or handle it fully for you.</p>
+                                <p>Yes — we can assist with setup or handle it fully for you. We also offer maintenance packages that include hosting.</p>
                             </div>
                         </div>
                     </div>
@@ -4028,6 +4327,7 @@
                 </div>
                 <div class="copyright animate-text">
                     <p>&copy; 2025 Androva Web Agency. All rights reserved.</p>
+                    <p style="margin-top: 10px; font-size: 0.8rem;">Prices are in EUR and do not include 25% VAT.</p>
                 </div>
             </div>
         </footer>
@@ -4125,6 +4425,7 @@
                     // Initialize all animations
                     initializeScrollAnimations();
                     initializeCodeAnimation();
+                    initializePricingTabs();
                 }, 1000);
             }, 3000);
         });
@@ -4344,6 +4645,39 @@
                 status.className = "status-error";
                 console.error(err);
             }
+        });
+
+        // Pricing Tabs Functionality
+        function initializePricingTabs() {
+            const tabs = document.querySelectorAll('.pricing-tab');
+            const contents = document.querySelectorAll('.pricing-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = tab.getAttribute('data-tab');
+                    const contentId = `${tabId}-content`;
+                    document.getElementById(contentId).classList.add('active');
+                });
+            });
+        }
+
+        // Add hover effects to pricing cards
+        document.querySelectorAll('.pricing-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
         });
     </script>
 </body>
