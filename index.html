@@ -3,592 +3,3100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrej Milkovic | Content Writer & Copywriter</title>
+    <title>Decision Copy Framework</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --black: #0a0a0a;
-            --dark-gray: #1a1a1a;
-            --medium-gray: #2a2a2a;
-            --light-gray: #e0e0e0;
-            --white: #ffffff;
-            --accent: #333333;
+            --black: #0A0A0A;
+            --charcoal: #1A1A1A;
+            --dark-gray: #2A2A2A;
+            --white: #FFFFFF;
+            --off-white: #F8F8F8;
+            --beige: #F5F3F0;
+            --light-beige: #FAF9F7;
+            --gold: #D4AF37;
+            --gold-light: #F4E4A4;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --aqua: #7FFFD4;
+            --coral: #FF7F7F;
+            --transition-fast: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-subtle: 0 4px 30px rgba(0, 0, 0, 0.05);
+            --shadow-medium: 0 15px 50px rgba(0, 0, 0, 0.1);
+            --shadow-gold: 0 15px 40px rgba(212, 175, 55, 0.2);
+            --shadow-glow: 0 0 50px rgba(212, 175, 55, 0.4);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        
+
         html {
             scroll-behavior: smooth;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
-            color: var(--black);
-            background-color: var(--white);
+            color: var(--dark-gray);
+            background: var(--white);
+            overflow-x: hidden;
             line-height: 1.6;
-            font-weight: 400;
+            opacity: 0;
+            animation: bodyEntrance 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            will-change: opacity;
         }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
+
+        @keyframes bodyEntrance {
+            to { opacity: 1; }
         }
-        
-        h1 {
-            font-size: 3.5rem;
-            letter-spacing: -0.03em;
+
+        h1, h2, h3, h4, .quote {
+            font-family: 'Source Serif Pro', serif;
+            font-weight: 700;
+            line-height: 1.1;
         }
-        
-        h2 {
-            font-size: 2.5rem;
-            letter-spacing: -0.02em;
-            position: relative;
-            display: inline-block;
-        }
-        
-        h2:after {
-            content: '';
-            position: absolute;
-            width: 60%;
-            height: 2px;
-            background-color: var(--black);
-            bottom: -8px;
-            left: 0;
-        }
-        
-        h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 40px;
         }
-        
+
         section {
-            padding: 5rem 0;
-            border-bottom: 1px solid var(--light-gray);
+            position: relative;
+            overflow: hidden;
+            will-change: transform, opacity;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000px;
         }
-        
-        section:last-of-type {
-            border-bottom: none;
+
+        /* Ultra Smooth Scroll Indicators */
+        .scroll-indicator {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 0.8s;
+            will-change: transform, opacity;
         }
-        
-        .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background-color: var(--black);
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            border: 1px solid var(--black);
+
+        .scroll-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.2);
             cursor: pointer;
+            transition: var(--transition-fast);
+            position: relative;
+            transform: translateZ(0);
+            will-change: transform, background;
         }
-        
-        .btn:hover {
-            background-color: transparent;
-            color: var(--black);
+
+        .scroll-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0.3;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        .btn-outline {
-            background-color: transparent;
-            color: var(--black);
-            border: 1px solid var(--black);
+
+        .scroll-dot:hover {
+            transform: scale(1.2);
+            background: var(--gold);
         }
-        
-        .btn-outline:hover {
-            background-color: var(--black);
-            color: var(--white);
+
+        .scroll-dot:hover::before {
+            transform: translate(-50%, -50%) scale(1);
         }
-        
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
+
+        .scroll-dot.active {
+            background: var(--gold);
+            transform: scale(1.3);
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        .scroll-dot.active::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Creator Info Banner - Optimized with Interactive Header */
+        .creator-banner {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.6s;
+            will-change: transform, opacity;
+            transform: translateZ(0);
+        }
+
+        .creator-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            max-width: 400px;
+            transition: var(--transition-fast);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+            will-change: transform, box-shadow;
+        }
+
+        .creator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--aqua));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .creator-card:hover {
+            transform: translateY(-2px) translateZ(0);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .creator-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .creator-header {
             display: flex;
             align-items: center;
-            padding-top: 2rem;
-            border-bottom: none;
-            position: relative;
-        }
-        
-        .hero-content {
-            width: 100%;
-        }
-        
-        .title {
-            font-size: 1.25rem;
-            color: var(--medium-gray);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-        
-        .value-statement {
-            font-size: 1.4rem;
-            color: var(--medium-gray);
-            max-width: 600px;
-            margin: 2rem 0 3rem 0;
-            font-weight: 300;
-        }
-        
-        /* Life Timer Section */
-        .life-timer {
-            text-align: center;
-            background-color: var(--black);
-            color: var(--white);
-            padding: 4rem 0;
-        }
-        
-        .life-timer h2 {
-            color: var(--white);
-            margin-bottom: 2.5rem;
-        }
-        
-        .life-timer h2:after {
-            background-color: var(--white);
-        }
-        
-        .seconds-counter {
-            font-size: 3.5rem;
-            font-family: 'Space Grotesk', monospace;
-            font-weight: 300;
-            letter-spacing: -0.03em;
+            gap: 1rem;
             margin-bottom: 1rem;
-        }
-        
-        .counter-label {
-            font-size: 1rem;
-            color: var(--light-gray);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-        
-        /* About Section */
-        .about-content {
-            max-width: 800px;
-        }
-        
-        .about-text {
-            font-size: 1.2rem;
-            line-height: 1.7;
-        }
-        
-        /* Skills Section */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .skill-card {
-            padding: 2rem;
-            border: 1px solid var(--light-gray);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-        
-        .skill-card:hover {
-            border-color: var(--black);
-            transform: translateY(-5px);
-        }
-        
-        .skill-card i {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--black);
-        }
-        
-        /* Certifications Section */
-        .certs-container {
-            margin-top: 3rem;
-        }
-        
-        .cert-card {
-            padding: 2rem;
-            border: 1px solid var(--light-gray);
-            border-radius: 2px;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
             cursor: pointer;
+            transition: var(--transition-fast);
+            padding: 0.5rem;
+            border-radius: 12px;
+            will-change: transform, background;
+            transform: translateZ(0);
         }
-        
-        .cert-card:hover {
-            border-color: var(--black);
-            transform: translateY(-3px);
+
+        .creator-header:hover {
+            background: rgba(212, 175, 55, 0.05);
+            transform: translateY(-2px) translateZ(0);
         }
-        
-        .cert-header {
+
+        .creator-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gold) 0%, #E6C158 100%);
+            border-radius: 50%;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-        
-        .cert-date {
-            color: var(--medium-gray);
-            font-size: 0.9rem;
-        }
-        
-        .cert-link {
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
             color: var(--black);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: inline-flex;
+            font-weight: 700;
+            box-shadow: var(--shadow-gold);
+            animation: floatAvatar 3s ease-in-out infinite;
+            will-change: transform;
+            transform: translateZ(0);
+            transition: var(--transition-fast);
+        }
+
+        .creator-header:hover .creator-avatar {
+            transform: scale(1.05) translateZ(0);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .creator-info {
+            flex: 1;
+        }
+
+        .creator-info h3 {
+            font-size: 1.2rem;
+            color: var(--black);
+            margin-bottom: 0.3rem;
+            display: flex;
             align-items: center;
             gap: 0.5rem;
+            transition: var(--transition-fast);
         }
-        
-        .cert-link:hover {
-            text-decoration: underline;
+
+        .creator-header:hover .creator-info h3 {
+            color: var(--gold);
+            transform: translateX(3px);
         }
-        
-        /* Portfolio Section */
-        .portfolio-container {
-            margin-top: 3rem;
+
+        .creator-info h3::after {
+            content: '👤';
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: var(--transition-fast);
         }
-        
-        .portfolio-item {
-            margin-bottom: 2.5rem;
-            padding-bottom: 2.5rem;
-            border-bottom: 1px solid var(--light-gray);
+
+        .creator-header:hover .creator-info h3::after {
+            opacity: 1;
+            transform: scale(1.2);
         }
-        
-        .portfolio-item:last-of-type {
-            border-bottom: none;
+
+        .creator-info p {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            opacity: 0.8;
+            transition: var(--transition-fast);
         }
-        
-        .portfolio-links {
+
+        .creator-header:hover .creator-info p {
+            color: var(--dark-gray);
+            opacity: 1;
+        }
+
+        /* Contact Options Modal */
+        .contact-modal {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 0.5rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1001;
+            will-change: transform, opacity;
+            transform: translateZ(0);
+        }
+
+        .contact-modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) translateZ(0);
+        }
+
+        .contact-options {
             display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
+            flex-direction: column;
+            gap: 0.8rem;
         }
-        
-        /* Contact Section */
-        .contact-container {
-            max-width: 600px;
+
+        .contact-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--dark-gray);
+            transition: var(--transition-fast);
+            will-change: transform, background;
+            transform: translateZ(0);
+            border: 1px solid transparent;
+        }
+
+        .contact-option:hover {
+            background: rgba(212, 175, 55, 0.05);
+            transform: translateX(5px) translateZ(0);
+            border-color: rgba(212, 175, 55, 0.2);
+        }
+
+        .contact-option.email:hover {
+            color: #EA4335;
+        }
+
+        .contact-option.linkedin:hover {
+            color: #0077B5;
+        }
+
+        .contact-option i {
+            font-size: 1.2rem;
+            width: 24px;
             text-align: center;
         }
-        
-        .contact-links {
+
+        .contact-option.email i {
+            color: #EA4335;
+        }
+
+        .contact-option.linkedin i {
+            color: #0077B5;
+        }
+
+        .contact-option span {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .contact-option .shortcut {
+            font-size: 0.8rem;
+            color: var(--gold);
+            opacity: 0.7;
+            padding: 0.2rem 0.5rem;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 4px;
+        }
+
+        .creator-books {
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .book-item {
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+            opacity: 0.8;
+            transition: var(--transition-fast);
+            will-change: transform, opacity;
+        }
+
+        .book-item:hover {
+            color: var(--black);
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        .book-item::before {
+            content: '📖';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .book-item.author {
+            font-style: italic;
+            color: var(--gold);
+            opacity: 0.7;
+        }
+
+        /* Contact Links in Creator Card */
+        .creator-contact {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            opacity: 0.8;
+            transition: var(--transition-fast);
+        }
+
+        .creator-card:hover .creator-contact {
+            opacity: 1;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            background: rgba(212, 175, 55, 0.05);
+            transition: var(--transition-fast);
+            will-change: transform, background;
+            transform: translateZ(0);
+        }
+
+        .contact-link:hover {
+            background: rgba(212, 175, 55, 0.15);
+            transform: translateY(-2px) translateZ(0);
+            color: var(--black);
+        }
+
+        .contact-link i {
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        .contact-link.email i {
+            color: #EA4335; /* Gmail red */
+        }
+
+        .contact-link.linkedin i {
+            color: #0077B5; /* LinkedIn blue */
+        }
+
+        /* Hero Section - Optimized */
+        .hero {
+            min-height: 100vh;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(127, 255, 212, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--black) 0%, var(--charcoal) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                transparent 0%,
+                rgba(212, 175, 55, 0.03) 50%,
+                transparent 100%);
+            animation: gradientSlide 8s ease-in-out infinite;
+            will-change: background-position;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+            filter: blur(60px);
+            opacity: 0;
+            animation: pulseGlow 3s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+            animation-delay: 0.5s;
+            will-change: transform, opacity;
+            transform: translateZ(0);
+        }
+
+        .hero-glow-1 {
+            top: -200px;
+            right: -200px;
+        }
+
+        .hero-glow-2 {
+            bottom: -200px;
+            left: -200px;
+            background: radial-gradient(circle, rgba(127, 255, 212, 0.3) 0%, transparent 70%);
+            animation-delay: 1s;
+        }
+
+        .hero-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold-light);
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 0 0 10px var(--gold-light);
+            animation: floatParticle 10s linear infinite;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .parallax-curve {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            opacity: 0;
+            animation: fadeInCurve 0.5s ease forwards 0.3s;
+            will-change: transform;
+            transform: translate(var(--mouse-x, 0), var(--mouse-y, 0)) translateZ(0);
+            transition: transform 0.1s linear;
+        }
+
+        .curve-1 { top: -200px; right: -200px; }
+        .curve-2 { bottom: -300px; left: -200px; border-color: rgba(127, 255, 212, 0.15); }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            will-change: transform, opacity;
+            transform: translateZ(0);
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            animation: headlineEntrance 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.2s;
+            position: relative;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            will-change: transform, opacity;
+        }
+
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent);
+            animation: shimmer 2s cubic-bezier(0.4, 0, 0.2, 1) forwards 1s;
+            will-change: left;
+        }
+
+        .subline {
+            font-size: 1.4rem;
+            color: var(--gold-light);
+            font-style: italic;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUpFade 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.4s;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+            will-change: transform, opacity;
+        }
+
+        .flow-indicator {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 2.5rem;
+            margin: 4rem auto;
+            position: relative;
+            height: 80px;
+            will-change: transform;
+            transform: translateZ(0);
         }
-        
-        .contact-item {
+
+        .flow-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg,
+                transparent,
+                var(--gold),
+                var(--aqua),
+                transparent);
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px var(--gold-glow);
+            will-change: width;
+        }
+
+        .flow-word {
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 0.8rem 1.8rem;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 50px;
+            color: var(--white);
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: wordEntrance 0.3s ease forwards;
+            transition: var(--transition-fast);
+            will-change: transform, background;
+            transform: translateZ(0);
+        }
+
+        .flow-word:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px) translateZ(0);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .flow-word:nth-child(2) { animation-delay: 0.4s; }
+        .flow-word:nth-child(3) { animation-delay: 0.6s; }
+        .flow-word:nth-child(4) { animation-delay: 0.8s; }
+
+        .hero-cta {
+            margin-top: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards 1s;
+            will-change: transform, opacity;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--gold) 0%, #E6C158 100%);
+            color: var(--black);
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 1.5rem 4rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            box-shadow: 
+                var(--shadow-gold),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            will-change: transform, box-shadow;
+            transform: translateZ(0);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent);
+            transform: translateX(-100%);
+            will-change: transform;
+        }
+
+        .cta-button:hover::before {
+            animation: shimmer 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) translateZ(0);
+            box-shadow: 
+                var(--shadow-glow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Decision Mapping Section - Optimized */
+        .mapping {
+            background: var(--white);
+            padding: 140px 0;
+            position: relative;
+            transform: translateZ(0);
+        }
+
+        .mapping-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(127, 255, 212, 0.03) 0%, transparent 50%);
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 6rem;
+            opacity: 0;
+            transform: translateY(20px);
+            will-change: transform, opacity;
+        }
+
+        .section-header.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        .section-header h2 {
+            font-size: 3.5rem;
+            color: var(--black);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--aqua));
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            opacity: 0.7;
+        }
+
+        .flowchart {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .flowchart-connector {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--aqua));
+            z-index: 1;
+            transform: translateY(-50%);
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            will-change: width;
+        }
+
+        .node {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            background: var(--off-white);
+            box-shadow: 
+                var(--shadow-subtle),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            will-change: transform, opacity, box-shadow;
+            transform: translateZ(0);
         }
-        
-        .contact-icon {
-            font-size: 1.5rem;
+
+        .node.animated {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: var(--transition);
+        }
+
+        .node.gold { 
+            background: linear-gradient(135deg, var(--gold) 0%, #E6C158 100%);
+            color: var(--black);
+        }
+        .node.aqua { 
+            background: linear-gradient(135deg, var(--aqua) 0%, #6BFFD6 100%);
+            color: var(--black);
+        }
+        .node.coral { 
+            background: linear-gradient(135deg, var(--coral) 0%, #FF9E9E 100%);
+            color: var(--white);
+        }
+        .node.dark { 
+            background: linear-gradient(135deg, var(--dark-gray) 0%, #3A3A3A 100%);
+            color: var(--white);
+        }
+
+        .node::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            background: inherit;
+            filter: blur(20px);
+            opacity: 0.6;
+            z-index: -1;
+            transition: var(--transition-fast);
+            will-change: opacity, filter;
+        }
+
+        .node:hover {
+            transform: translateY(-5px) scale(1.05) translateZ(0);
+            box-shadow: 
+                var(--shadow-gold),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+            animation: breathe 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .node:hover::before {
+            opacity: 0.8;
+            filter: blur(30px);
+        }
+
+        .node-number {
+            font-size: 2.2rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
         }
-        
-        .contact-link {
-            color: var(--black);
-            text-decoration: none;
+
+        .node-text {
+            font-size: 0.9rem;
             font-weight: 500;
-        }
-        
-        .contact-link:hover {
-            text-decoration: underline;
-        }
-        
-        .footer {
             text-align: center;
-            padding: 2rem 0;
-            color: var(--medium-gray);
+            letter-spacing: 0.5px;
+        }
+
+        .node-tooltip {
+            position: absolute;
+            bottom: 160px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px) scale(0.95);
+            width: 300px;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1.8rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-medium);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-fast);
+            z-index: 100;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            backdrop-filter: blur(20px);
+            will-change: transform, opacity;
+            transform: translateZ(0);
+        }
+
+        .node:hover .node-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0) scale(1) translateZ(0);
+        }
+
+        .node-tooltip h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--black);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .node-tooltip h4::before {
+            content: '💡';
             font-size: 0.9rem;
         }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+
+        .node-tooltip p {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        /* Data Gathering Section - Optimized */
+        .data {
+            background: linear-gradient(135deg, var(--off-white) 0%, var(--light-beige) 100%);
+            padding: 140px 0;
+            position: relative;
+            transform: translateZ(0);
+        }
+
+        .data-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(127, 255, 212, 0.05) 0%, transparent 50%);
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-subtle);
+            transition: var(--transition-fast);
+            opacity: 0;
+            transform: translateY(20px) rotateX(10deg);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            will-change: transform, opacity, box-shadow;
+            transform: translateZ(0);
+        }
+
+        .card.animated {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+            transition: var(--transition);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--aqua));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 30%, rgba(212, 175, 55, 0.03) 100%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) rotateX(0) translateZ(0);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            display: inline-block;
+            animation: iconFloat 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            will-change: transform;
+        }
+
+        .card-icon:nth-child(1) { animation-delay: 0s; }
+        .card-icon:nth-child(2) { animation-delay: 0.2s; }
+        .card-icon:nth-child(3) { animation-delay: 0.4s; }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--black);
+            position: relative;
+            display: inline-block;
+        }
+
+        .card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 1px;
+        }
+
+        .card p {
+            color: var(--dark-gray);
+            font-size: 1rem;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        /* Pattern Recognition Section - Optimized */
+        .pattern {
+            background: var(--white);
+            padding: 140px 0;
+            position: relative;
+            transform: translateZ(0);
+        }
+
+        .pattern-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg,
+                    transparent 30%,
+                    rgba(212, 175, 55, 0.03) 50%,
+                    transparent 70%);
+            animation: gradientShift 6s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+            will-change: background-position;
+        }
+
+        .pattern-container {
+            max-width: 900px;
+            height: 400px;
+            margin: 0 auto;
+            position: relative;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .pattern-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(90deg, rgba(127, 255, 212, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba(127, 255, 212, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 15s linear infinite;
+            will-change: background-position;
+        }
+
+        .pattern-line {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--coral));
+            transform-origin: left center;
+            opacity: 0;
+            transform: scaleX(0);
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            will-change: transform, opacity;
+        }
+
+        .pattern-dot {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: pulseDot 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            box-shadow: 
+                0 0 20px var(--gold-glow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            will-change: transform, opacity;
+            transform: translateZ(0);
+        }
+
+        .pattern-quote {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--black);
+            max-width: 800px;
+            margin: 5rem auto 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: var(--shadow-subtle);
+            will-change: transform, opacity;
+            transform: translateZ(0);
+        }
+
+        .pattern-quote.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        /* Interactive Typewriter - Optimized */
+        .interactive-typewriter {
+            position: relative;
+            min-height: 120px;
+            margin-top: 2rem;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .typewriter-text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 1rem;
+            min-height: 80px;
+            position: relative;
+        }
+
+        .typewriter-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 1.5rem;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .letter-slot {
+            width: 50px;
+            height: 60px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            will-change: transform, background, box-shadow;
+            transform: translateZ(0);
+        }
+
+        .letter-slot.filled {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(127, 255, 212, 0.2) 100%);
+            color: var(--black);
+            border-color: var(--gold);
+            transform: translateY(-5px) translateZ(0);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .letter-slot.correct {
+            background: linear-gradient(135deg, var(--gold) 0%, #E6C158 100%);
+            color: var(--black);
+            border-color: var(--gold);
+            animation: correctLetter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .letter-slot.incorrect {
+            background: linear-gradient(135deg, var(--coral) 0%, #FF9E9E 100%);
+            color: var(--white);
+            border-color: var(--coral);
+            animation: shake 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .letter-slot::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .letter-slot.active::after {
+            transform: scaleX(1);
+        }
+
+        .word-hint {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            opacity: 0.7;
+            margin-top: 1.5rem;
+            font-style: italic;
+            text-align: center;
+            min-height: 30px;
+            will-change: opacity;
+        }
+
+        .word-hint span {
+            color: var(--gold);
+            font-weight: 600;
+            opacity: 1;
+        }
+
+        .typing-instruction {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            text-align: center;
+            margin-top: 1.5rem;
+            opacity: 0.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .typing-instruction::before {
+            content: '⌨️';
+        }
+
+        .complete-message {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 600;
+            text-align: center;
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, opacity;
+        }
+
+        .complete-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .restart-button {
+            background: linear-gradient(135deg, var(--aqua) 0%, #6BFFD6 100%);
+            color: var(--black);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: var(--transition-fast);
+            opacity: 0;
+            transform: translateY(10px);
+            box-shadow: 0 5px 15px rgba(127, 255, 212, 0.3);
+            will-change: transform, opacity;
+            transform: translateZ(0);
+        }
+
+        .restart-button.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        .restart-button:hover {
+            transform: translateY(-3px) translateZ(0);
+            box-shadow: 0 10px 25px rgba(127, 255, 212, 0.4);
+        }
+
+        /* Copy Diagnostics Section - Optimized */
+        .diagnostics {
+            background: var(--beige);
+            padding: 140px 0;
+            position: relative;
+            transform: translateZ(0);
+        }
+
+        .diagnostics-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            background: 
+                radial-gradient(circle at 30% 50%, var(--gold) 0%, transparent 50%),
+                radial-gradient(circle at 70% 20%, var(--aqua) 0%, transparent 50%);
+            animation: gradientFloat 12s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .copy-blocks {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .copy-block {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-subtle);
+            transition: var(--transition-fast);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            will-change: transform, opacity, box-shadow;
+            transform: translateZ(0);
+        }
+
+        .copy-block.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        .copy-block::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--gold), var(--aqua));
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .copy-block::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 30%, rgba(212, 175, 55, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .copy-block:hover::before {
+            transform: scaleY(1);
+        }
+
+        .copy-block:hover::after {
+            opacity: 1;
+        }
+
+        .copy-block:hover {
+            transform: translateY(-8px) translateZ(0);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .copy-block:hover .copy-analysis {
+            max-height: 100px;
+            opacity: 1;
+            margin-top: 1.5rem;
+        }
+
+        .copy-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--black);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .copy-text::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--gold);
+            font-size: 2rem;
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .copy-analysis {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-analysis::before {
+            content: '→';
+            color: var(--aqua);
+        }
+
+        /* Testing Section - Optimized */
+        .testing {
+            background: var(--white);
+            padding: 140px 0;
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        .testing-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(127, 255, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 127, 127, 0.1) 0%, transparent 50%);
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            height: 500px;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .timeline-path {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 3px;
+            background: linear-gradient(90deg,
+                transparent,
+                var(--gold),
+                var(--aqua),
+                transparent);
+            transform: translate(-50%, -50%);
+            opacity: 0.4;
+            border-radius: 2px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .timeline-block {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 2.2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-subtle);
+            width: 300px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            opacity: 0;
+            transform: translateY(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            will-change: transform, opacity, box-shadow;
+            transform: translateZ(0);
+        }
+
+        .timeline-block.animated {
+            opacity: 1;
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        .timeline-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 30%, rgba(212, 175, 55, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            border-radius: 16px;
+        }
+
+        .timeline-block:hover {
+            transform: translateY(-5px) scale(1.05) translateZ(0);
+            box-shadow: var(--shadow-gold);
+            z-index: 10;
+        }
+
+        .timeline-block:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-block h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--black);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-block h4::before {
+            content: '📊';
+            font-size: 1.1rem;
+        }
+
+        .timeline-block p {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .block-1 { top: 20%; left: 10%; }
+        .block-2 { top: 50%; left: 35%; }
+        .block-3 { top: 20%; right: 10%; }
+
+        /* Case Study Modal - Optimized */
+        .case-study-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(20px);
+            will-change: opacity;
+        }
+
+        .case-study-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, var(--white) 0%, var(--off-white) 100%);
+            padding: 3.5rem;
+            border-radius: 24px;
+            max-width: 650px;
+            width: 90%;
+            transform: translateY(20px) scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                var(--shadow-medium),
+                0 0 0 1px rgba(212, 175, 55, 0.1);
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--aqua));
+        }
+
+        .case-study-modal.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-content h3 {
+            font-size: 1.8rem;
+            color: var(--black);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-content h3::before {
+            content: '🏆';
+        }
+
+        .modal-content p {
+            color: var(--dark-gray);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer - Optimized with Contact Info */
+        footer {
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(127, 255, 212, 0.15) 0%, transparent 50%),
+                linear-gradient(135deg, var(--black) 0%, var(--charcoal) 100%);
+            padding: 140px 0 80px;
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        .footer-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: gradientFloat 10s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .footer-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .footer-cta {
+            margin-bottom: 5rem;
+        }
+
+        .footer-cta h2 {
+            font-size: 3.5rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition-fast);
+            position: relative;
+            padding: 0.5rem 0;
+            will-change: color, transform;
+        }
+
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 1px;
+            will-change: width;
+        }
+
+        .footer-link:hover {
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .footer-link:hover::after {
+            width: 100%;
+        }
+
+        /* Footer Contact Section */
+        .footer-contact {
+            margin: 4rem 0 3rem;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .footer-contact h3 {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .footer-contact h3::before {
+            content: '📧';
+            font-size: 1.3rem;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-button {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-fast);
+            will-change: transform, box-shadow;
+            transform: translateZ(0);
+        }
+
+        .contact-button.email {
+            background: linear-gradient(135deg, #EA4335 0%, #D14836 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(234, 67, 53, 0.3);
+        }
+
+        .contact-button.linkedin {
+            background: linear-gradient(135deg, #0077B5 0%, #006699 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 119, 181, 0.3);
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px) translateZ(0);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-button i {
+            font-size: 1.2rem;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            margin-top: 2rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Ultra Fast Animations */
+        @keyframes floatParticle {
+            0% { 
+                transform: translateY(100vh) rotate(0deg) scale(0); 
+                opacity: 0; 
             }
-            
-            h2 {
+            10% { 
+                opacity: 0.8; 
+                transform: translateY(90vh) rotate(90deg) scale(1);
+            }
+            90% { 
+                opacity: 0.8; 
+            }
+            100% { 
+                transform: translateY(-100px) rotate(360deg) scale(0); 
+                opacity: 0; 
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { 
+                opacity: 0.4; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.8; 
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes fadeInCurve {
+            to {
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes headlineEntrance {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes gradientSlide {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes wordEntrance {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes floatAvatar {
+            0%, 100% { 
+                transform: translateY(0) translateZ(0); 
+            }
+            50% { 
+                transform: translateY(-10px) translateZ(0); 
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                box-shadow: 
+                    var(--shadow-gold),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    var(--shadow-glow),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        @keyframes breathe {
+            0%, 100% { 
+                transform: translateY(-5px) scale(1.05) translateZ(0);
+            }
+            50% { 
+                transform: translateY(-5px) scale(1.08) translateZ(0);
+            }
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { 
+                transform: translateY(0) translateZ(0);
+            }
+            50% { 
+                transform: translateY(-10px) translateZ(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { 
+                background-position: 0% 50%; 
+            }
+            100% { 
+                background-position: 100% 50%; 
+            }
+        }
+
+        @keyframes gridMove {
+            0% { 
+                background-position: 0 0;
+            }
+            100% { 
+                background-position: 50px 50px;
+            }
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { 
+                transform: scale(1) translateZ(0); 
+                opacity: 0.8;
+                box-shadow: 
+                    0 0 20px var(--gold-glow),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+            50% { 
+                transform: scale(1.3) translateZ(0); 
+                opacity: 1;
+                box-shadow: 
+                    0 0 40px var(--gold-glow),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        @keyframes correctLetter {
+            0% { transform: scale(1) translateZ(0); }
+            50% { transform: scale(1.2) translateZ(0); }
+            100% { transform: scale(1) translateZ(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0) translateZ(0); }
+            25% { transform: translateX(-5px) translateZ(0); }
+            75% { transform: translateX(5px) translateZ(0); }
+        }
+
+        @keyframes gradientFloat {
+            0% { 
+                transform: translate(0, 0) scale(1) translateZ(0); 
+            }
+            100% { 
+                transform: translate(-30px, 30px) scale(1.1) translateZ(0); 
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 30px;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+            }
+
+            .flowchart {
+                flex-direction: column;
+                gap: 4rem;
+            }
+
+            .flowchart-connector {
+                top: 0;
+                left: 50%;
+                width: 3px;
+                height: 0;
+            }
+
+            .timeline-container {
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .timeline-block {
+                position: static;
+                width: 100%;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .timeline-path {
+                display: none;
+            }
+
+            .creator-banner {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 2rem auto;
+                transform: translateY(50px);
+                animation: slideInBottom 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.6s;
+            }
+
+            .creator-card {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .letter-slot {
+                width: 40px;
+                height: 50px;
+                font-size: 1.8rem;
+            }
+
+            .typewriter-text {
                 font-size: 2rem;
             }
-            
-            section {
-                padding: 3rem 0;
+
+            .scroll-indicator {
+                right: 20px;
             }
-            
-            .hero {
-                min-height: 90vh;
+
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
             }
-            
-            .seconds-counter {
+
+            .contact-button {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .contact-modal {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) translateY(-10px);
+                width: 90%;
+                max-width: 400px;
+                margin: 0;
+            }
+
+            .contact-modal.active {
+                transform: translate(-50%, -50%) translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .subline {
+                font-size: 1.2rem;
+            }
+
+            .section-header h2 {
                 font-size: 2.5rem;
             }
-            
-            .cert-header {
-                flex-direction: column;
-                gap: 0.5rem;
+
+            .pattern-quote {
+                font-size: 2rem;
+                padding: 2rem;
+            }
+
+            .footer-cta h2 {
+                font-size: 2.5rem;
+            }
+
+            .creator-banner {
+                padding: 0 10px;
+            }
+
+            .letter-slot {
+                width: 30px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+
+            .typewriter-text {
+                font-size: 1.8rem;
+            }
+
+            .word-hint {
+                font-size: 1rem;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+
+            .footer-contact {
+                padding: 1.5rem;
+            }
+
+            .contact-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @keyframes slideInBottom {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-content">
-            <div class="title">Content Writer & Copywriter</div>
-            <h1>Andrej Milkovic</h1>
-            <p class="value-statement">Writing clear, purposeful content for digital marketing, email campaigns, and social media.</p>
-            <a href="#contact" class="btn">Get in touch</a>
-        </div>
-    </section>
+    <!-- Ultra Smooth Scroll Indicators -->
+    <div class="scroll-indicator" id="scrollIndicator">
+        <div class="scroll-dot active" data-section="hero"></div>
+        <div class="scroll-dot" data-section="mapping"></div>
+        <div class="scroll-dot" data-section="data"></div>
+        <div class="scroll-dot" data-section="pattern"></div>
+        <div class="scroll-dot" data-section="diagnostics"></div>
+        <div class="scroll-dot" data-section="testing"></div>
+        <div class="scroll-dot" data-section="footer"></div>
+    </div>
 
-    <!-- Life Timer Section -->
-    <section class="life-timer">
-        <div class="container">
-            <h2>Time & Intention</h2>
-            <div class="seconds-counter" id="seconds-counter">0</div>
-            <div class="counter-label">Seconds lived so far</div>
-            <p style="max-width: 600px; margin: 2rem auto 0; color: #ccc; font-weight: 300;">
-                Every moment is an opportunity to create meaningful content and drive measurable results.
-            </p>
-        </div>
-    </section>
-
-    <!-- About Me Section -->
-    <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <p class="about-text">
-                    As a junior content writer and copywriter, I combine foundational certifications in digital marketing, content strategy, social media, and email marketing with a commitment to clarity, purpose, and measurable results.
-                </p>
-                <p class="about-text">
-                    I focus on creating structured, goal-oriented content that aligns with brand voice and marketing objectives. My approach is built on reliability, continuous learning, and a preference for long-term remote collaboration within dedicated marketing teams.
-                </p>
+    <!-- Creator Info Banner -->
+    <div class="creator-banner" id="creatorBanner">
+        <div class="creator-card">
+            <div class="creator-header" onclick="toggleContactModal()">
+                <div class="creator-avatar">A</div>
+                <div class="creator-info">
+                    <h3>Andrej Milkovic</h3>
+                    <p>Author & Psychology Writer</p>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Skills Section -->
-    <section id="skills">
-        <div class="container">
-            <h2>Skills & Services</h2>
-            <div class="skills-container">
-                <div class="skill-card">
-                    <i class="fas fa-pen-nib"></i>
-                    <h3>Content Writing</h3>
-                    <p>Blogs, articles, and long-form content that engages audiences and supports SEO objectives.</p>
+            <!-- Contact Options Modal -->
+            <div class="contact-modal" id="contactModal">
+                <div class="contact-options">
+                    <a href="mailto:androvatech@gmail.com" class="contact-option email" target="_blank" onclick="closeContactModal()">
+                        <i class="fas fa-envelope"></i>
+                        <span>Send Email</span>
+                        <div class="shortcut">androvatech@gmail.com</div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/andrej-milkovi%C4%87-800448375/" class="contact-option linkedin" target="_blank" onclick="closeContactModal()">
+                        <i class="fab fa-linkedin"></i>
+                        <span>Connect on LinkedIn</span>
+                        <div class="shortcut">Open Profile</div>
+                    </a>
                 </div>
-                <div class="skill-card">
-                    <i class="fas fa-file-alt"></i>
-                    <h3>Copywriting</h3>
-                    <p>Web copy, landing pages, and marketing materials focused on conversion and brand messaging.</p>
-                </div>
-                <div class="skill-card">
+            </div>
+            
+            <div class="creator-books">
+                <div class="book-item">"On Writing Psychological Darkness"</div>
+                <div class="book-item author">Co-author: "THE PSYCHOLOGY OF A FOOL"</div>
+                <div class="book-item">"The Architecture of Attention: Design Your Environment, Energy and Systems for Deep Work"</div>
+            </div>
+            
+            <div class="creator-contact">
+                <a href="mailto:androvatech@gmail.com" class="contact-link email" target="_blank">
                     <i class="fas fa-envelope"></i>
-                    <h3>Email Marketing</h3>
-                    <p>Subject lines, body copy, and CTAs designed to increase open rates and drive action.</p>
+                    <span>Email</span>
+                </a>
+                <a href="https://www.linkedin.com/in/andrej-milkovi%C4%87-800448375/" class="contact-link linkedin" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+        <div class="hero-particles" id="particles"></div>
+        <div class="parallax-curve curve-1" id="curve1"></div>
+        <div class="parallax-curve curve-2" id="curve2"></div>
+       
+        <div class="container">
+            <div class="hero-content">
+                <h1>Copy That Predicts Decisions, Not Writes Them</h1>
+                <p class="subline">Mapping every buyer's resistance, motivation, and impulse</p>
+               
+                <div class="flow-indicator">
+                    <div class="flow-line" id="flowLine"></div>
+                    <div class="flow-word">Decision</div>
+                    <div class="flow-word">Motivation</div>
+                    <div class="flow-word">Action</div>
                 </div>
-                <div class="skill-card">
-                    <i class="fas fa-hashtag"></i>
-                    <h3>Social Media Content</h3>
-                    <p>Platform-specific content creation for brand awareness and audience engagement.</p>
+               
+                <div class="hero-cta">
+                    <button class="cta-button" onclick="scrollToSection('footer')">Start Mapping Decisions</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Certifications Section -->
-    <section id="certifications">
+    <!-- Decision Mapping -->
+    <section class="mapping" id="mapping">
+        <div class="mapping-bg"></div>
         <div class="container">
-            <h2>Certifications</h2>
-            <div class="certs-container">
-                <div class="cert-card" onclick="window.open('https://app-eu1.hubspot.com/academy/achievements/2l552752/en/1/andrej-milkovic/content-marketing', '_blank')">
-                    <div class="cert-header">
-                        <h3>Content Marketing Certification</h3>
-                        <div class="cert-date">Jan 6, 2026 – Feb 5, 2028</div>
-                    </div>
-                    <p>HubSpot Academy</p>
-                    <div class="cert-link">
-                        View Certificate <i class="fas fa-external-link-alt"></i>
-                    </div>
-                </div>
-                
-                <div class="cert-card" onclick="window.open('https://app-eu1.hubspot.com/academy/achievements/lmf79t52/en/1/andrej-milkovic/social-media-marketing', '_blank')">
-                    <div class="cert-header">
-                        <h3>Social Media Marketing Certification</h3>
-                        <div class="cert-date">Jan 13, 2026 – Feb 12, 2028</div>
-                    </div>
-                    <p>HubSpot Academy</p>
-                    <div class="cert-link">
-                        View Certificate <i class="fas fa-external-link-alt"></i>
-                    </div>
-                </div>
-                
-                <div class="cert-card" onclick="window.open('https://app-eu1.hubspot.com/academy/achievements/80bz2lqt/en/1/horoz-na/digital-marketing', '_blank')">
-                    <div class="cert-header">
-                        <h3>Digital Marketing Certification</h3>
-                        <div class="cert-date">Jan 2, 2026 – Feb 1, 2027</div>
-                    </div>
-                    <p>HubSpot Academy</p>
-                    <div class="cert-link">
-                        View Certificate <i class="fas fa-external-link-alt"></i>
-                    </div>
-                </div>
-                
-                <div class="cert-card" onclick="window.open('https://app-eu1.hubspot.com/academy/achievements/9cgrrrft/en/1/andrej-milkovic/email-marketing', '_blank')">
-                    <div class="cert-header">
-                        <h3>Email Marketing Certification</h3>
-                        <div class="cert-date">Jan 13, 2026 – Feb 12, 2028</div>
-                    </div>
-                    <p>HubSpot Academy</p>
-                    <div class="cert-link">
-                        View Certificate <i class="fas fa-external-link-alt"></i>
-                    </div>
-                </div>
+            <div class="section-header" id="mappingHeader">
+                <h2>Decision Mapping</h2>
+                <p>Visualize the psychological journey from hesitation to action</p>
             </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio">
-        <div class="container">
-            <h2>Writing Samples & Experience</h2>
-            <div class="portfolio-container">
-                <div class="portfolio-item">
-                    <h3>Published Articles</h3>
-                    <p>Blog and marketing articles focused on digital strategy, content creation, and marketing insights.</p>
-                    <div class="portfolio-links">
-                        <a href="https://substack.com/@hindsightis2010" target="_blank" class="btn btn-outline">Substack Profile</a>
-                        <a href="https://medium.com/@HindsightIs2010" target="_blank" class="btn btn-outline">Medium Profile</a>
+           
+            <div class="flowchart">
+                <div class="flowchart-connector" id="flowchartConnector"></div>
+               
+                <div class="node gold" id="node1">
+                    <div class="node-number">1</div>
+                    <div class="node-text">Awareness</div>
+                    <div class="node-tooltip">
+                        <h4>"Do I need this?"</h4>
+                        <p>Copy addresses latent needs before explicit wants. Example: "Noticed your growth has plateaued?"</p>
                     </div>
                 </div>
-                
-                <div class="portfolio-item">
-                    <h3>Email Campaign Creation</h3>
-                    <p>Development of complete email marketing campaigns with strategic subject lines, body copy, and CTAs designed for conversion.</p>
+               
+                <div class="node aqua" id="node2">
+                    <div class="node-number">2</div>
+                    <div class="node-text">Consideration</div>
+                    <div class="node-tooltip">
+                        <h4>"Is this worth it?"</h4>
+                        <p>Copy frames value in terms of lost opportunity. Example: "What does indecision cost your business quarterly?"</p>
+                    </div>
                 </div>
-                
-                <div class="portfolio-item">
-                    <h3>Social Media Content</h3>
-                    <p>Platform-specific content creation focused on brand voice consistency and audience engagement.</p>
+               
+                <div class="node coral" id="node3">
+                    <div class="node-number">3</div>
+                    <div class="node-text">Decision</div>
+                    <div class="node-tooltip">
+                        <h4>"I want this now"</h4>
+                        <p>Copy triggers urgency through scarcity of insight. Example: "3 spots remaining for Q1 decision mapping"</p>
+                    </div>
                 </div>
-                
-                <div class="portfolio-item">
-                    <h3>Book Contribution</h3>
-                    <p>Writing contributor and co-author for published work available on Amazon.</p>
-                    <div class="portfolio-links">
-                        <a href="https://www.amazon.com/dp/B0GG4SLH2C" target="_blank" class="btn btn-outline">View on Amazon</a>
-                        <a href="https://www.amazon.com/dp/B0GJS41D9M" target="_blank" class="btn btn-outline">Author of the book</a>
+               
+                <div class="node dark" id="node4">
+                    <div class="node-number">4</div>
+                    <div class="node-text">Action</div>
+                    <div class="node-tooltip">
+                        <h4>"This solves my problem"</h4>
+                        <p>Copy confirms decision with post-rationalization. Example: "You've chosen growth over stagnation"</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
+    <!-- Data Gathering -->
+    <section class="data" id="data">
+        <div class="data-bg"></div>
         <div class="container">
-            <div class="contact-container">
-                <h2>Contact</h2>
-                <p>I am actively seeking remote employment opportunities for long-term collaboration within a marketing team.</p>
+            <div class="section-header" id="dataHeader">
+                <h2>Data Gathering</h2>
+                <p>Methodical research reveals hidden psychological triggers</p>
+            </div>
+           
+            <div class="cards-container">
+                <div class="card" id="card1">
+                    <div class="card-icon">🎯</div>
+                    <h3>Buyer Psychology Analysis</h3>
+                    <p>Uncover subconscious motivations through structured interviews and behavioral observation.</p>
+                </div>
+               
+                <div class="card" id="card2">
+                    <div class="card-icon">🧩</div>
+                    <h3>Pattern Isolation</h3>
+                    <p>Separate signal from noise to identify recurring psychological triggers across industries.</p>
+                </div>
+               
+                <div class="card" id="card3">
+                    <div class="card-icon">📈</div>
+                    <h3>Behavioral Data Synthesis</h3>
+                    <p>Transform observations into actionable frameworks that predict decision paths.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pattern Recognition Section -->
+    <section class="pattern" id="pattern">
+        <div class="pattern-bg"></div>
+        <div class="container">
+            <div class="section-header" id="patternHeader">
+                <h2>Pattern Recognition</h2>
+                <p>Every purchase follows a predictable psychological pattern</p>
+            </div>
+           
+            <div class="pattern-container">
+                <div class="pattern-grid"></div>
+                <div class="pattern-line" id="patternLine1" style="top: 30%; left: 10%; width: 40%; transform: rotate(10deg);"></div>
+                <div class="pattern-line" id="patternLine2" style="top: 50%; left: 20%; width: 50%; transform: rotate(-5deg);"></div>
+                <div class="pattern-line" id="patternLine3" style="top: 70%; left: 5%; width: 60%; transform: rotate(15deg);"></div>
+                <div class="pattern-dot" id="dot1" style="top: 30%; left: 10%;"></div>
+                <div class="pattern-dot" id="dot2" style="top: 50%; left: 70%;"></div>
+                <div class="pattern-dot" id="dot3" style="top: 70%; left: 60%;"></div>
+            </div>
+           
+            <div class="pattern-quote" id="patternQuote">
+                <div class="typewriter-text">
+                    <span class="completed-text"></span>
+                    <span class="current-letter"></span>
+                </div>
                 
-                <div class="contact-links">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <a href="mailto:andrejmilkovic93@gmail.com" class="contact-link">andrejmilkovic93@gmail.com</a>
+                <div class="interactive-typewriter">
+                    <div class="typewriter-line" id="typewriterLine">
+                        <!-- Letter slots will be generated by JavaScript -->
                     </div>
                     
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fab fa-linkedin"></i>
-                        </div>
-                        <a href="https://www.linkedin.com/in/andrej-milkovi%C4%87-800448375/" target="_blank" class="contact-link">LinkedIn Profile</a>
+                    <div class="word-hint" id="wordHint">
+                        Type the word: <span id="targetWord"></span>
                     </div>
+                    
+                    <div class="typing-instruction">
+                        Type on your keyboard to complete the phrase
+                    </div>
+                    
+                    <div class="complete-message" id="completeMessage">
+                        🎉 Perfect! You've completed the pattern!
+                    </div>
+                    
+                    <button class="restart-button" id="restartButton" onclick="restartTypewriter()">
+                        Try Another Pattern
+                    </button>
                 </div>
-                
-                <a href="mailto:andrejmilkovic93@gmail.com" class="btn">Contact for Opportunities</a>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
+    <!-- Copy Diagnostics -->
+    <section class="diagnostics" id="diagnostics">
+        <div class="diagnostics-bg"></div>
         <div class="container">
-            <p>&copy; 2026 Andrej Milkovic. All rights reserved.</p>
+            <div class="section-header" id="diagnosticsHeader">
+                <h2>Copy as Diagnostics</h2>
+                <p>Each phrase tests a hypothesis about buyer psychology</p>
+            </div>
+           
+            <div class="copy-blocks">
+                <div class="copy-block" id="copyBlock1">
+                    <div class="copy-text">"Stop guessing what works. Start knowing."</div>
+                    <div class="copy-analysis">Removes doubt → Prompts action</div>
+                </div>
+               
+                <div class="copy-block" id="copyBlock2">
+                    <div class="copy-text">"The invisible framework behind every conversion."</div>
+                    <div class="copy-analysis">Frames value → Creates desire</div>
+                </div>
+               
+                <div class="copy-block" id="copyBlock3">
+                    <div class="copy-text">"Your competitors don't know this exists."</div>
+                    <div class="copy-analysis">Triggers FOMO → Establishes exclusivity</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testing Section -->
+    <section class="testing" id="testing">
+        <div class="testing-bg"></div>
+        <div class="container">
+            <div class="section-header" id="testingHeader">
+                <h2>Testing & Iteration</h2>
+                <p>Systematically reducing psychological resistance</p>
+            </div>
+           
+            <div class="timeline-container">
+                <div class="timeline-path"></div>
+               
+                <div class="timeline-block block-1" id="timeline1" onclick="showCaseStudy(1)">
+                    <h4>Baseline Psychology</h4>
+                    <p>Establishing current conversion patterns and psychological friction points.</p>
+                </div>
+               
+                <div class="timeline-block block-2" id="timeline2" onclick="showCaseStudy(2)">
+                    <h4>Hypothesis Development</h4>
+                    <p>Creating targeted copy variations that address specific decision barriers.</p>
+                </div>
+               
+                <div class="timeline-block block-3" id="timeline3" onclick="showCaseStudy(3)">
+                    <h4>Iterative Optimization</h4>
+                    <p>Systematically testing and optimizing based on decision analytics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Modal -->
+    <div class="case-study-modal" id="caseStudyModal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Case Study</h3>
+            <p id="modalContent"></p>
+            <button onclick="closeModal()" style="margin-top: 2rem; padding: 0.8rem 2rem; background: linear-gradient(135deg, var(--gold) 0%, #E6C158 100%); color: var(--black); border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: var(--transition-fast);">Close Case Study</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-bg"></div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-cta">
+                    <h2>Master Decision Psychology</h2>
+                    <button class="cta-button" onclick="bookSession()">Book Your Session / Start Mapping</button>
+                </div>
+               
+                <div class="footer-links">
+                    <a href="#mapping" class="footer-link">Decision Mapping</a>
+                    <a href="#data" class="footer-link">Methodology</a>
+                    <a href="#diagnostics" class="footer-link">Copy Diagnostics</a>
+                    <a href="#testing" class="footer-link">Case Studies</a>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="footer-contact">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-buttons">
+                        <a href="mailto:androvatech@gmail.com" class="contact-button email" target="_blank">
+                            <i class="fas fa-envelope"></i>
+                            <span>androvatech@gmail.com</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/andrej-milkovi%C4%87-800448375/" class="contact-button linkedin" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn Profile</span>
+                        </a>
+                    </div>
+                </div>
+               
+                <p class="copyright">© Decision Copy Framework. Created by Andrej Milkovic. All intellectual property protected.</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Seconds Lived Counter
-        function updateSecondsCounter() {
-            // Date of birth: January 18, 2006
-            const birthDate = new Date('January 18, 2006 00:00:00');
-            const now = new Date();
+        // Optimized performance variables
+        let rafId;
+        let isScrolling = false;
+        let lastScrollTime = 0;
+        const scrollDelay = 16; // ~60fps
+        let contactModalOpen = false;
+
+        // Contact Modal Functionality
+        function toggleContactModal() {
+            const contactModal = document.getElementById('contactModal');
+            contactModalOpen = !contactModalOpen;
             
-            // Calculate difference in seconds
-            const diffInSeconds = Math.floor((now - birthDate) / 1000);
-            
-            // Format number with commas
-            const formattedSeconds = diffInSeconds.toLocaleString('en-US');
-            
-            // Update the counter element
-            document.getElementById('seconds-counter').textContent = formattedSeconds;
+            if (contactModalOpen) {
+                contactModal.classList.add('active');
+                // Close modal when clicking outside
+                setTimeout(() => {
+                    document.addEventListener('click', closeContactModalOnClickOutside);
+                }, 100);
+            } else {
+                closeContactModal();
+            }
         }
-        
-        // Update counter immediately and then every second
-        updateSecondsCounter();
-        setInterval(updateSecondsCounter, 1000);
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
+
+        function closeContactModal() {
+            const contactModal = document.getElementById('contactModal');
+            contactModal.classList.remove('active');
+            contactModalOpen = false;
+            document.removeEventListener('click', closeContactModalOnClickOutside);
+        }
+
+        function closeContactModalOnClickOutside(event) {
+            const contactModal = document.getElementById('contactModal');
+            const creatorHeader = document.querySelector('.creator-header');
+            
+            if (!contactModal.contains(event.target) && !creatorHeader.contains(event.target)) {
+                closeContactModal();
+            }
+        }
+
+        // Ultra Smooth Scroll Manager
+        class SmoothScrollManager {
+            constructor() {
+                this.currentSection = 'hero';
+                this.sections = ['hero', 'mapping', 'data', 'pattern', 'diagnostics', 'testing', 'footer'];
+                this.scrollDots = document.querySelectorAll('.scroll-dot');
+                this.init();
+            }
+
+            init() {
+                // Add click handlers for scroll dots
+                this.scrollDots.forEach(dot => {
+                    dot.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const section = dot.dataset.section;
+                        this.scrollToSection(section);
+                        this.setActiveDot(section);
+                    });
+                });
+
+                // Listen for scroll events with throttling
+                window.addEventListener('scroll', () => {
+                    if (!isScrolling) {
+                        isScrolling = true;
+                        rafId = requestAnimationFrame(() => {
+                            this.handleScroll();
+                            isScrolling = false;
+                        });
+                    }
+                });
+
+                // Update scroll indicator on load
+                this.updateScrollIndicator();
+            }
+
+            handleScroll() {
+                const currentTime = Date.now();
+                if (currentTime - lastScrollTime > scrollDelay) {
+                    this.updateScrollIndicator();
+                    lastScrollTime = currentTime;
+                }
+            }
+
+            updateScrollIndicator() {
+                const scrollPosition = window.scrollY + window.innerHeight / 3;
+                let currentSection = 'hero';
+
+                // Find current section
+                for (const section of this.sections) {
+                    const element = document.getElementById(section);
+                    if (element) {
+                        const rect = element.getBoundingClientRect();
+                        const offset = window.scrollY + rect.top;
+                        
+                        if (scrollPosition >= offset) {
+                            currentSection = section;
+                        }
+                    }
+                }
+
+                if (currentSection !== this.currentSection) {
+                    this.currentSection = currentSection;
+                    this.setActiveDot(currentSection);
+                }
+            }
+
+            setActiveDot(section) {
+                this.scrollDots.forEach(dot => {
+                    if (dot.dataset.section === section) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            scrollToSection(section) {
+                const element = document.getElementById(section);
+                if (element) {
+                    const offset = 80;
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = element.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset;
+
                     window.scrollTo({
-                        top: targetElement.offsetTop - 20,
+                        top: offsetPosition,
                         behavior: 'smooth'
                     });
                 }
+            }
+        }
+
+        // Interactive Typewriter Game - Optimized
+        const patterns = [
+            "PATTERN",
+            "DECISION", 
+            "PSYCHOLOGY",
+            "MOTIVATION",
+            "BEHAVIOR",
+            "FRAMEWORK",
+            "ANALYSIS",
+            "STRATEGY"
+        ];
+
+        let currentPattern = "";
+        let currentIndex = 0;
+        let isCompleted = false;
+
+        function initTypewriter() {
+            currentPattern = patterns[Math.floor(Math.random() * patterns.length)];
+            currentIndex = 0;
+            isCompleted = false;
+            
+            const typewriterLine = document.getElementById('typewriterLine');
+            const targetWordElement = document.getElementById('targetWord');
+            const completedTextElement = document.querySelector('.completed-text');
+            const currentLetterElement = document.querySelector('.current-letter');
+            const completeMessage = document.getElementById('completeMessage');
+            const restartButton = document.getElementById('restartButton');
+            
+            // Clear existing slots
+            typewriterLine.innerHTML = '';
+            targetWordElement.textContent = currentPattern;
+            completedTextElement.textContent = '';
+            currentLetterElement.textContent = '';
+            completeMessage.classList.remove('show');
+            restartButton.classList.remove('show');
+            
+            // Create letter slots
+            for (let i = 0; i < currentPattern.length; i++) {
+                const slot = document.createElement('div');
+                slot.className = 'letter-slot';
+                slot.dataset.index = i;
+                slot.dataset.letter = currentPattern[i];
+                typewriterLine.appendChild(slot);
+            }
+            
+            // Activate first slot
+            updateActiveSlot();
+            
+            // Add optimized keyboard listener
+            document.addEventListener('keydown', handleKeyPress, { passive: true });
+        }
+
+        function updateActiveSlot() {
+            const slots = document.querySelectorAll('.letter-slot');
+            const completedTextElement = document.querySelector('.completed-text');
+            const currentLetterElement = document.querySelector('.current-letter');
+            
+            slots.forEach(slot => {
+                slot.classList.remove('active');
+                slot.classList.remove('filled');
             });
-        });
+            
+            if (currentIndex < currentPattern.length) {
+                const activeSlot = document.querySelector(`.letter-slot[data-index="${currentIndex}"]`);
+                if (activeSlot) {
+                    activeSlot.classList.add('active');
+                }
+                
+                // Update text display
+                completedTextElement.textContent = currentPattern.slice(0, currentIndex);
+                currentLetterElement.textContent = currentPattern[currentIndex];
+            } else {
+                completedTextElement.textContent = currentPattern;
+                currentLetterElement.textContent = '';
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (isCompleted) return;
+            
+            const key = event.key.toUpperCase();
+            if (key.length === 1 && key >= 'A' && key <= 'Z') {
+                const slots = document.querySelectorAll('.letter-slot');
+                const currentSlot = slots[currentIndex];
+                
+                if (currentSlot) {
+                    currentSlot.textContent = key;
+                    currentSlot.classList.add('filled');
+                    
+                    if (key === currentPattern[currentIndex]) {
+                        // Correct letter
+                        currentSlot.classList.add('correct');
+                        currentSlot.classList.remove('incorrect');
+                        
+                        currentIndex++;
+                        
+                        if (currentIndex === currentPattern.length) {
+                            completeTypewriter();
+                        } else {
+                            updateActiveSlot();
+                        }
+                    } else {
+                        // Incorrect letter
+                        currentSlot.classList.add('incorrect');
+                        currentSlot.classList.remove('correct');
+                        
+                        // Shake animation
+                        currentSlot.style.animation = 'shake 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                        setTimeout(() => {
+                            currentSlot.style.animation = '';
+                            currentSlot.textContent = '';
+                            currentSlot.classList.remove('filled');
+                            currentSlot.classList.remove('incorrect');
+                        }, 300);
+                    }
+                }
+            }
+        }
+
+        function completeTypewriter() {
+            isCompleted = true;
+            const completeMessage = document.getElementById('completeMessage');
+            const restartButton = document.getElementById('restartButton');
+            
+            // Animate all slots
+            const slots = document.querySelectorAll('.letter-slot');
+            slots.forEach((slot, index) => {
+                setTimeout(() => {
+                    slot.style.transform = 'translateY(-10px) translateZ(0)';
+                    slot.style.boxShadow = '0 15px 30px rgba(212, 175, 55, 0.4)';
+                }, index * 50);
+            });
+            
+            setTimeout(() => {
+                completeMessage.classList.add('show');
+                restartButton.classList.add('show');
+                
+                // Remove keyboard listener
+                document.removeEventListener('keydown', handleKeyPress);
+            }, slots.length * 50);
+        }
+
+        function restartTypewriter() {
+            const slots = document.querySelectorAll('.letter-slot');
+            slots.forEach(slot => {
+                slot.style.transform = '';
+                slot.style.boxShadow = '';
+            });
+            
+            initTypewriter();
+        }
+
+        // Toggle creator info visibility
+        let creatorVisible = true;
         
-        // Make entire certification cards clickable
-        document.querySelectorAll('.cert-card').forEach(card => {
-            card.style.cursor = 'pointer';
+        function toggleCreatorInfo() {
+            const creatorBanner = document.getElementById('creatorBanner');
+            creatorVisible = !creatorVisible;
+            
+            if (creatorVisible) {
+                creatorBanner.style.opacity = '1';
+                creatorBanner.style.transform = 'translateX(0) translateZ(0)';
+                creatorBanner.style.pointerEvents = 'all';
+            } else {
+                creatorBanner.style.opacity = '0';
+                creatorBanner.style.transform = 'translateX(50px) translateZ(0)';
+                creatorBanner.style.pointerEvents = 'none';
+            }
+        }
+
+        // Enhanced particle system - Optimized
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 100; // Reduced for performance
+           
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+               
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+               
+                // Random size and color
+                const size = 1 + Math.random() * 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+               
+                // Random color variation
+                const colors = ['var(--gold-light)', 'var(--aqua)', 'var(--white)'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = color;
+                particle.style.boxShadow = `0 0 10px ${color}`;
+               
+                // Random opacity
+                const opacity = 0.3 + Math.random() * 0.5;
+                particle.style.opacity = opacity;
+               
+                // Random animation
+                const duration = 6 + Math.random() * 8;
+                const delay = Math.random() * 15;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+               
+                container.appendChild(particle);
+            }
+        }
+
+        // Enhanced parallax curves - Optimized
+        function initParallax() {
+            const curves = [document.getElementById('curve1'), document.getElementById('curve2')];
+            let mouseX = 0;
+            let mouseY = 0;
+           
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 60;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 60;
+            });
+
+            // Update curves on animation frame
+            function updateParallax() {
+                curves.forEach((curve, index) => {
+                    const multiplier = index === 0 ? 0.8 : 0.5;
+                    curve.style.transform = `translate(${mouseX * multiplier}px, ${mouseY * multiplier}px) translateZ(0)`;
+                });
+                requestAnimationFrame(updateParallax);
+            }
+            
+            updateParallax();
+        }
+
+        // Flow line animation
+        function initFlowLine() {
+            const flowLine = document.getElementById('flowLine');
+           
+            // Initial animation
+            setTimeout(() => {
+                flowLine.style.width = '0%';
+                setTimeout(() => {
+                    flowLine.style.width = '80%';
+                }, 300);
+            }, 500);
+        }
+
+        // Ultra Smooth Scroll Animations with Intersection Observer
+        function initScrollAnimations() {
+            const animatedElements = {
+                headers: ['mappingHeader', 'dataHeader', 'patternHeader', 'diagnosticsHeader', 'testingHeader'],
+                nodes: ['node1', 'node2', 'node3', 'node4'],
+                cards: ['card1', 'card2', 'card3'],
+                copyBlocks: ['copyBlock1', 'copyBlock2', 'copyBlock3'],
+                timelineBlocks: ['timeline1', 'timeline2', 'timeline3'],
+                patternQuote: ['patternQuote']
+            };
+
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        
+                        // Add animated class based on element type
+                        if (element.id.includes('Header')) {
+                            element.classList.add('animated');
+                        } else if (element.id.includes('node')) {
+                            element.classList.add('animated');
+                        } else if (element.id.includes('card')) {
+                            element.classList.add('animated');
+                        } else if (element.id.includes('copyBlock')) {
+                            element.classList.add('animated');
+                        } else if (element.id.includes('timeline')) {
+                            element.classList.add('animated');
+                        } else if (element.id === 'patternQuote') {
+                            element.classList.add('animated');
+                            // Start typewriter when section is visible
+                            if (!isTypewriterInitialized) {
+                                initTypewriter();
+                                isTypewriterInitialized = true;
+                            }
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animated elements
+            Object.values(animatedElements).flat().forEach(id => {
+                const element = document.getElementById(id);
+                if (element) observer.observe(element);
+            });
+
+            // Animate flowchart connector
+            const flowchartObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const connector = document.getElementById('flowchartConnector');
+                        setTimeout(() => {
+                            if (window.innerWidth > 1024) {
+                                connector.style.width = '100%';
+                            } else {
+                                connector.style.height = '100%';
+                            }
+                        }, 200);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            const flowchart = document.querySelector('.flowchart');
+            if (flowchart) flowchartObserver.observe(flowchart);
+
+            // Animate pattern lines
+            const patternObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const lines = ['patternLine1', 'patternLine2', 'patternLine3'];
+                        const dots = ['dot1', 'dot2', 'dot3'];
+                       
+                        lines.forEach((lineId, index) => {
+                            setTimeout(() => {
+                                const line = document.getElementById(lineId);
+                                if (line) {
+                                    line.style.opacity = '0.9';
+                                    line.style.transform = line.style.transform.replace('scaleX(0)', 'scaleX(1)');
+                                }
+                            }, index * 200);
+                        });
+                       
+                        dots.forEach((dotId, index) => {
+                            setTimeout(() => {
+                                const dot = document.getElementById(dotId);
+                                if (dot) {
+                                    dot.style.opacity = '0.8';
+                                    dot.style.animationPlayState = 'running';
+                                }
+                            }, index * 300);
+                        });
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            const patternContainer = document.getElementById('pattern');
+            if (patternContainer) patternObserver.observe(patternContainer);
+        }
+
+        // Case study modal
+        const caseStudies = [
+            {
+                title: "SaaS Enterprise: 89% Increase in Qualified Leads",
+                content: "By addressing 'time investment' resistance at the awareness stage through targeted copy that reframed the investment from 'cost' to 'strategic priority,' we increased qualified lead conversion by 89% in 3 months. The psychological shift from seeing it as an expense to viewing it as a necessary growth catalyst was key."
+            },
+            {
+                title: "E-commerce Brand: 142% Higher AOV",
+                content: "Mapping impulse triggers and reducing cognitive load at checkout through simplified, psychologically-optimized copy resulted in a 142% increase in average order value and 67% reduction in cart abandonment. We identified that decision fatigue was the primary barrier and created copy that eliminated unnecessary choices."
+            },
+            {
+                title: "Consulting Firm: 3.2x Conversion Rate",
+                content: "Diagnosing and removing the 'credibility gap' through strategic copy positioning and social proof integration increased conversion rates by 320% while decreasing customer acquisition costs by 45%. The framework revealed that prospects needed validation of expertise before considering investment."
+            }
+        ];
+
+        let isTypewriterInitialized = false;
+        let smoothScrollManager;
+
+        function showCaseStudy(index) {
+            const modal = document.getElementById('caseStudyModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+           
+            title.textContent = caseStudies[index - 1].title;
+            content.textContent = caseStudies[index - 1].content;
+           
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('caseStudyModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Optimized hover effects
+        function initHoverEffects() {
+            // Add hover effect to all interactive elements
+            const interactiveElements = document.querySelectorAll('.node, .card, .copy-block, .timeline-block, .flow-word, .contact-link, .contact-button, .contact-option');
+           
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    element.style.transition = 'transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+               
+                element.addEventListener('mouseleave', () => {
+                    element.style.transition = 'var(--transition-fast)';
+                });
+            });
+        }
+
+        // Email and LinkedIn functions
+        function sendEmail() {
+            window.location.href = 'mailto:androvatech@gmail.com?subject=Decision Copy Framework Inquiry&body=Hello Andrej, I would like to learn more about the Decision Copy Framework.';
+        }
+
+        function openLinkedIn() {
+            window.open('https://www.linkedin.com/in/andrej-milkovi%C4%87-800448375/', '_blank');
+        }
+
+        // Utility functions
+        function scrollToSection(sectionId) {
+            smoothScrollManager.scrollToSection(sectionId);
+        }
+
+        function bookSession() {
+            const email = 'androvatech@gmail.com';
+            const subject = 'Decision Copy Framework - Session Booking';
+            const body = 'Hello Andrej,\n\nI would like to book a session to learn more about the Decision Copy Framework.\n\nBest regards,\n[Your Name]';
+            
+            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize smooth scroll manager first
+            smoothScrollManager = new SmoothScrollManager();
+            
+            createParticles();
+            initParallax();
+            initFlowLine();
+            initScrollAnimations();
+            initHoverEffects();
+           
+            // Add CSS animation for initial page load
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                document.body.style.opacity = '1';
+            }, 50);
+           
+            // Close modal on background click
+            document.getElementById('caseStudyModal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('caseStudyModal')) {
+                    closeModal();
+                }
+            });
+           
+            // Add keyboard escape for modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeModal();
+                    closeContactModal();
+                }
+            });
+
+            // Auto-hide creator banner on scroll
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const creatorBanner = document.getElementById('creatorBanner');
+                
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Scrolling down
+                    creatorBanner.style.opacity = '0';
+                    creatorBanner.style.transform = 'translateX(50px) translateZ(0)';
+                    creatorBanner.style.pointerEvents = 'none';
+                    creatorVisible = false;
+                    closeContactModal();
+                } else if (scrollTop < lastScrollTop - 10) {
+                    // Scrolling up
+                    creatorBanner.style.opacity = '1';
+                    creatorBanner.style.transform = 'translateX(0) translateZ(0)';
+                    creatorBanner.style.pointerEvents = 'all';
+                    creatorVisible = true;
+                }
+                lastScrollTop = scrollTop;
+            }, { passive: true });
+
+            // Add contact link functionality
+            document.querySelectorAll('a[href^="mailto:"], a[href^="https://"]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // Add smooth transition before opening link
+                    e.currentTarget.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        e.currentTarget.style.transform = '';
+                    }, 200);
+                });
+            });
+
+            // Cleanup on page unload
+            window.addEventListener('beforeunload', () => {
+                if (rafId) {
+                    cancelAnimationFrame(rafId);
+                }
+            });
         });
     </script>
 </body>
